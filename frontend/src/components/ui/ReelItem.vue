@@ -32,7 +32,41 @@
                     </button>
                 </div>
             </div>
+            <div class="video-statistics">
+                <div class="video-statistics-container">
 
+
+                    <div class="flex">
+                        <div class="column">
+                            <div class="image-container">
+                                <img src="@/assets/images/icons/views.svg" alt="Картинка 1">
+                            </div>
+                            <div class="stats caption regular">42</div>
+                        </div>
+
+                        <div class="column">
+                            <div class="image-container">
+                                <img src="@/assets/images/icons/likes.svg" alt="Картинка 2">
+                            </div>
+                            <div class="stats caption regular">128</div>
+                        </div>
+
+                        <div class="column">
+                            <div class="image-container">
+                                <img src="@/assets/images/icons/comments.svg" alt="Картинка 3">
+                            </div>
+                            <div class="stats caption regular">7</div>
+                        </div>
+
+                        <div class="column">
+                            <div class="image-container">
+                                <img src="@/assets/images/icons/shares.svg" alt="Картинка 4">
+                            </div>
+                            <div class="stats caption regular">256</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <img :src="image" alt="Post Image" class="post-image">
         </div>
         <div class="blogger-card container">
@@ -90,6 +124,9 @@ const {
     width: 100%;
     justify-content: space-between;
 }
+
+
+
 
 .video-actions {
     position: absolute;
@@ -175,10 +212,10 @@ const {
 }
 
 .icon-button-sm {
-       display: flex;
+    display: flex;
     align-items: center;
     padding: 6px;
-    gap:6px;
+    gap: 6px;
     background-color: var(--Black-40, #00000066);
     color: white;
     border: none;
@@ -192,7 +229,7 @@ const {
     display: flex;
     align-items: center;
     padding: 8px;
-    gap:8px;
+    gap: 8px;
     background-color: var(--Black-40, #00000066);
     color: white;
     border: none;
@@ -225,5 +262,56 @@ const {
 .icon img {
     max-width: 100%;
     max-height: 100%;
+}
+
+.video-statistics {
+    display: flex;
+    justify-content: space-between;
+    max-width: 254px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+.video-statistics-container {
+    margin: 10px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    width: 100%;
+    backdrop-filter: blur(8px);
+
+    background-color: var(--Black-40, #00000066);
+}
+
+.video-statistics .stats {
+
+    color: white;
+    padding-bottom: 5px;
+}
+
+.column {
+    flex: 1;
+
+    padding: 0px;
+    text-align: center;
+}
+
+.image-container {
+    width: 100%;
+    padding: 5px;
+}
+
+.image-container img {
+    width: 20px;
+    height: 20px;
+}
+
+
+
+@media (max-width: 768px) {
+    .panel {
+        flex-direction: column;
+    }
 }
 </style>
