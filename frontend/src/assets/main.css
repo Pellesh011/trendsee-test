@@ -62,6 +62,14 @@ p {
   margin: 0px;
 }
 
+.flex {
+    display: flex;
+
+    gap: 10px;
+}
+
+
+
 button.primary.background-default {
   background-color: var(--components-button-primary-background-default, #2B31B3);
   color: #f8f9fa;
@@ -110,4 +118,8 @@ button.primary.background-default {
 
 .semibold {
   font-weight: 600;
+}
+
+.black-40 {
+  background: var(--Black-40, #00000066);
 }

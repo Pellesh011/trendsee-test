@@ -1,6 +1,38 @@
 <template>
     <div class="video-cart">
         <div class="video-content">
+            <div class="video-actions panel">
+
+                <div class="flex left-panel">
+                    <div class="">
+                        <button class="icon-button-sm">
+                            <span class="icon icon-16">
+                                <img src="@/assets/images/icons/media.svg" alt="Icon">
+                            </span>
+                            <span class="text">Reels</span>
+                        </button>
+                        <button class="icon-button-sm">
+                            <span class="icon  icon-16">
+                                <img src="@/assets/images/icons/hot.svg" alt="Icon">
+                            </span>
+                            <span class="text">X10</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="right-panel">
+                    <button class="icon-button-lg">
+                        <span class="icon  icon-20">
+                            <img src="@/assets/images/icons/like.svg" alt="Icon">
+                        </span>
+                    </button>
+                    <button class="icon-button-lg">
+                        <span class="icon  icon-20">
+                            <img src="@/assets/images/icons/share.svg" alt="Icon">
+                        </span>
+                    </button>
+                </div>
+            </div>
+
             <img :src="image" alt="Post Image" class="post-image">
         </div>
         <div class="blogger-card container">
@@ -54,6 +86,17 @@ const {
 </script>
 
 <style scoped>
+.panel {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.video-actions {
+    position: absolute;
+    /* width: 100%; */
+    display: flex;
+}
+
 .video-cart {
     width: 262px;
     height: 576px;
@@ -97,12 +140,6 @@ const {
     align-items: center;
 }
 
-.flex {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 .blogger-avatar {
     width: 40px;
     height: 40px;
@@ -115,21 +152,78 @@ const {
     border: 1px solid var(--White-100, #FFFFFF);
 }
 
-.blogger-follow {
-    width: 32px;
-    height: 32px;
-    padding: 0;
+.video-actions .btn {
+    color: white;
+    height: 28px;
+    min-width: 28px;
+}
+
+.video-actions .btn>img {
+    width: 16px;
+    height: 16px;
+    ;
+}
+
+.video-actions .left-panel {
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.video-actions .right-panel {
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.icon-button-sm {
+       display: flex;
+    align-items: center;
+    padding: 6px;
+    gap:6px;
+    background-color: var(--Black-40, #00000066);
+    color: white;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    background-color: transparent;
+    font-size: 12px;
+    margin-bottom: 4px;
 }
 
-.blogger-follow:hover {
-    opacity: 1;
+.icon-button-lg {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    gap:8px;
+    background-color: var(--Black-40, #00000066);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-bottom: 4px;
 }
 
-.blogger-follow img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.icon-button span.text {
+    margin-left: 4px;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-20 {
+    width: 20px;
+    height: 20px;
+}
+
+.icon-16 {
+    width: 16px;
+    height: 16px;
+}
+
+.icon img {
+    max-width: 100%;
+    max-height: 100%;
 }
 </style>
