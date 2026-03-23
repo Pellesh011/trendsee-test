@@ -85,7 +85,7 @@ const {
 }
 
 .video-content .post-image {
-    width: 254px;
+    max-width: 254px;
     height: 400px;
     border-radius: 12px;
 }
