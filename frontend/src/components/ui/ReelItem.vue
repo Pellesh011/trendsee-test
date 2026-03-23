@@ -181,6 +181,9 @@ const {
     width: 40px;
     height: 40px;
 }
+.blogger-body{
+    padding-left: 10px;
+}
 
 .user-avatar {
     width: 100%;
@@ -280,7 +283,6 @@ const {
     border-radius: 8px;
     width: 100%;
     backdrop-filter: blur(8px);
-
     background-color: var(--Black-40, #00000066);
 }
 
@@ -292,7 +294,6 @@ const {
 
 .column {
     flex: 1;
-
     padding: 0px;
     text-align: center;
 }
@@ -306,8 +307,6 @@ const {
     width: 20px;
     height: 20px;
 }
-
-
 
 @media (max-width: 768px) {
     .panel {
