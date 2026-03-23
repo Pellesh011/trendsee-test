@@ -1,0 +1,142 @@
+/* Global styles for Trendsee Frontend */
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: #f8f9fa;
+}
+
+#app {
+  height: 100vh;
+  display: flex;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.find-more-btn,
+.analysis-button {
+  background-color: #4267B2;
+  color: white;
+  padding: 12px 24px;
+  transition: background-color 0.2s;
+}
+
+.find-more-btn:hover,
+.analysis-button:hover {
+  background-color: #365899;
+}
+
+.text-secondary {
+  color: var(--text-secondary, #4E616B);
+}
+
+.text-secondary-inverse {
+  color: var(--text-secondary-inverse, #A0ADB4);
+}
+
+
+:root {
+  --text-brand-medium: #2B31B3;
+  --text-secondary: #4E616B;
+  --text-secondary-inverse: #A0ADB4;
+  --components-button-primary-background-default: #2B31B3;
+  --White-100: #FFFFFF;
+}
+p{
+  margin: 0px;
+}
+
+button.primary.background-default{
+ background-color: var(--components-button-primary-background-default, #2B31B3);
+ color: #f8f9fa;
+ width: 100%;
+    height: 40px;
+    padding: 10px 20px;
+    font-size: 14px;
+    z-index: 10;
+    border-radius: 12px 12px;
+}
+
+.text-brand:hover {
+  text-decoration: underline;
+}
+.height-100{
+  height: 100%;
+}
+
+.text-brand {
+  color: var(--text-brand-medium, #2B31B3);
+  text-decoration: none;
+  padding-bottom: 4px;
+}
+
+.block {
+  display: block;
+}
+
+.container {
+  padding: 0 7px;
+}
+
+.grid {
+  display: grid;
+}
+
+.text-caption {
+  font-family: inherit;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+}
+
+.text-date {
+  font-family: inherit;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  padding-bottom: 4px;
+}
+
+.heading-6 {
+  font-size: 14px;
+  letter-spacing: 0.1px;
+}
+
+.caption {
+  font-size: 12px;
+  line-height: 14.5px;
+  letter-spacing: 0.4px;
+}
+
+.action-small {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+}
+
+.regular {
+  font-weight: 500;
+}
+
+.semibold {
+  font-weight: 600;
+}
