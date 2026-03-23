@@ -1,4 +1,4 @@
-/* Global styles for Trendsee Frontend */
+/* Cleaned Global styles for Trendsee Frontend - Removed unused: .analysis-button, .text-caption, .text-date, .block */
 
 * {
   box-sizing: border-box;
@@ -21,6 +21,7 @@ html {
 .container {
   display: flex;
   height: 100vh;
+  padding: 0 7px;
 }
 
 button {
@@ -30,16 +31,14 @@ button {
   font-weight: 500;
 }
 
-.find-more-btn,
-.analysis-button {
+.find-more-btn {
   background-color: #4267B2;
   color: white;
   padding: 12px 24px;
   transition: background-color 0.2s;
 }
 
-.find-more-btn:hover,
-.analysis-button:hover {
+.find-more-btn:hover {
   background-color: #365899;
 }
 
@@ -51,7 +50,6 @@ button {
   color: var(--text-secondary-inverse, #A0ADB4);
 }
 
-
 :root {
   --text-brand-medium: #2B31B3;
   --text-secondary: #4E616B;
@@ -59,26 +57,20 @@ button {
   --components-button-primary-background-default: #2B31B3;
   --White-100: #FFFFFF;
 }
-p{
+
+p {
   margin: 0px;
 }
 
-button.primary.background-default{
- background-color: var(--components-button-primary-background-default, #2B31B3);
- color: #f8f9fa;
- width: 100%;
-    height: 40px;
-    padding: 10px 20px;
-    font-size: 14px;
-    z-index: 10;
-    border-radius: 12px 12px;
-}
-
-.text-brand:hover {
-  text-decoration: underline;
-}
-.height-100{
-  height: 100%;
+button.primary.background-default {
+  background-color: var(--components-button-primary-background-default, #2B31B3);
+  color: #f8f9fa;
+  width: 100%;
+  height: 40px;
+  padding: 10px 20px;
+  font-size: 14px;
+  z-index: 10;
+  border-radius: 12px;
 }
 
 .text-brand {
@@ -87,33 +79,12 @@ button.primary.background-default{
   padding-bottom: 4px;
 }
 
-.block {
-  display: block;
-}
-
-.container {
-  padding: 0 7px;
+.height-100 {
+  height: 100%;
 }
 
 .grid {
   display: grid;
-}
-
-.text-caption {
-  font-family: inherit;
-  font-style: normal;
-  font-size: 13px;
-  line-height: 16px;
-  letter-spacing: 0.4px;
-}
-
-.text-date {
-  font-family: inherit;
-  font-style: normal;
-  font-size: 13px;
-  line-height: 16px;
-  letter-spacing: 0.4px;
-  padding-bottom: 4px;
 }
 
 .heading-6 {
