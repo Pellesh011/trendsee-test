@@ -111,6 +111,9 @@
     </nav>
     <div class="layout bg-white">
       <div class="tokens horizontal-align">
+        <span class="icon  icon-16">
+          <img src="@/assets/images/icons/fire.svg" alt="Icon">
+        </span>
         <span class="body-small italic bold">Токены</span>
         <span class="background-tertiary body-small text-lh-caption bold flex-content-right">1 245 / 4 497</span>
       </div>
