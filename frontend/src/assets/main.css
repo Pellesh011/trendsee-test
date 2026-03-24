@@ -19,13 +19,13 @@ html {
 }
 
 .container {
-  display: flex;
-  height: 100vh;
+
   padding: 0 7px;
 }
 
 button {
   cursor: pointer;
+  background-color: transparent;
   border: none;
   border-radius: 6px;
   font-weight: 500;
@@ -112,9 +112,12 @@ button.primary.background-default {
   line-height: 21px;
 }
 
+.text-lh-caption {
+  line-height: 14.5px;
+}
+
 .caption {
   font-size: 12px;
-  line-height: 14.5px;
   letter-spacing: 0.4px;
 }
 
@@ -158,11 +161,25 @@ button.primary.background-default {
 .body-medium {
   font-weight: 500;
 }
-
-.caption {
-  font-size: 12px;
+.italic {
+  font-style: italic;
 }
+.body-small {
+  font-size: 14px;
+}
+
 
 .bold {
   font-weight: bold;
+}
+
+.flex-content-right{
+  margin-left: auto;
+}
+.horizontal-align {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  width: fit-content;
+   width: 100%;
 }

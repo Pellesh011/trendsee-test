@@ -15,7 +15,7 @@
             <span class="icon  icon-16">
               <img src="@/assets/images/icons/home.svg" alt="Icon">
             </span>
-            <span class="text-secondary  body-medium">Главная</span>
+            <span class="text-secondary menu-text body-medium">Главная</span>
 
           </a>
         </li>
@@ -24,7 +24,7 @@
             <span class="icon  icon-16">
               <img src="@/assets/images/icons/video.svg" alt="Icon">
             </span>
-            <span class="text-secondary  body-medium">Видео</span>
+            <span class="text-secondary  menu-text body-medium">Видео</span>
 
           </a>
         </li>
@@ -33,7 +33,7 @@
             <span class="icon  icon-16">
               <img src="@/assets/images/icons/search.svg" alt="Icon">
             </span>
-            <span class="text-secondary  body-medium">Шпионаж</span>
+            <span class="text-secondary menu-text  body-medium">Шпионаж</span>
 
           </a>
         </li>
@@ -42,8 +42,8 @@
             <span class="icon  icon-16">
               <img src="@/assets/images/icons/radar.svg" alt="Icon">
             </span>
-            <span class="text-secondary  body-medium">Контент радар</span>
-            <span class="background-brand-subtle text-brand badger caption bold ">123</span>
+            <span class="text-secondary menu-text  body-medium">Контент радар</span>
+            <span class="background-brand-subtle text-brand badger caption text-lh-caption bold ">123</span>
           </a>
         </li>
 
@@ -53,7 +53,7 @@
             <span class="icon  icon-16">
               <img src="@/assets/images/icons/cross-posting.svg" alt="Icon">
             </span>
-            <span class="text-secondary  body-medium">Кросс-постинг</span>
+            <span class="text-secondary menu-text  body-medium">Кросс-постинг</span>
           </a>
         </li>
         <li class="sub-menu-item">
@@ -61,7 +61,7 @@
             <span class="icon  icon-16">
               <img src="@/assets/images/icons/chat-bots.svg" alt="Icon">
             </span>
-            <span class="text-secondary  body-medium">Чат боты</span>
+            <span class="text-secondary  menu-text body-medium">Чат боты</span>
           </a>
         </li>
         <li class="sub-menu"><a>Инструменты</a></li>
@@ -70,7 +70,7 @@
             <span class="icon  icon-16">
               <img src="@/assets/images/icons/ai-scenarios.svg" alt="Icon">
             </span>
-            <span class="text-secondary  body-medium">ИИ-сценарный</span>
+            <span class="text-secondary  menu-text body-medium">ИИ-сценарный</span>
           </a>
         </li>
 
@@ -79,7 +79,7 @@
             <span class="icon  icon-16">
               <img src="@/assets/images/icons/carusel.svg" alt="Icon">
             </span>
-            <span class="text-secondary  body-medium">Карусели</span>
+            <span class="text-secondary menu-text  body-medium">Карусели</span>
           </a>
         </li>
         <li class="sub-menu-item">
@@ -87,7 +87,7 @@
             <span class="icon  icon-16">
               <img src="@/assets/images/icons/an-video.svg" alt="Icon">
             </span>
-            <span class="text-secondary  body-medium">Анализ видео</span>
+            <span class="text-secondary menu-text  body-medium">Анализ видео</span>
           </a>
         </li>
         <li class="sub-menu-item">
@@ -95,7 +95,7 @@
             <span class="icon  icon-16">
               <img src="@/assets/images/icons/an-prof.svg" alt="Icon">
             </span>
-            <span class="text-secondary  body-medium">Анализ профиля</span>
+            <span class="text-secondary  menu-text body-medium">Анализ профиля</span>
           </a>
         </li>
         <li class="sub-menu-item">
@@ -103,20 +103,28 @@
             <span class="icon  icon-16">
               <img src="@/assets/images/icons/chernovik.svg" alt="Icon">
             </span>
-            <span class="text-secondary  body-medium">Черновик</span>
-            <span class="background-tertiary badger caption bold text-secondary">скоро</span>
+            <span class="text-secondary  menu-text body-medium">Черновик</span>
+            <span class="background-tertiary badger caption text-lh-caption bold text-secondary">скоро</span>
           </a>
         </li>
       </ul>
     </nav>
     <div class="tokens horizontal-align">
-      <span class="icon  icon-16">
+      
+      <span class="body-small italic bold">Токены</span>
+      <span class="background-tertiary body-small text-lh-caption bold flex-content-right">1 245 / 4 497</span>
+    </div>
+    <div class="tokens-slide-bar">
+      <div class="tokens-slide-bar-full">
+        <div class="tokens-slide-bar-filled"></div>
+      </div>
+    </div>
+    <div class="tokens horizontal-align">
+      <span class="body-small italic bold">Creative +</span>
+      <span class="icon  icon-16  flex-content-right">
         <img src="@/assets/images/icons/fire.svg" alt="Icon">
       </span>
-      <span class="text-secondary  body-medium">Токены</span>
-      <span class="background-tertiary caption bold text-secondary">1 245 / 4 497</span>
     </div>
-
 
 
   </div>
@@ -127,6 +135,26 @@
 </script>
 
 <style scoped>
+.tokens-slide-bar{
+  width: 100%;
+  height:10px;
+}
+.tokens-slide-bar-full{
+  border: 1px solid transparent;
+  border-radius: 8px;
+  height: 100%;
+  background-color: var(--backgroud-tertiary, #E6E8EA);
+}
+.tokens-slide-bar-filled{
+  width:40%;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  height: 100%;
+  background-color: var(--text-brand-medium, #E6E8EA);
+}
+.sidebar .sub-menu-item  .menu-text {
+  margin-left: 10px;
+}
 .sidebar {
   min-width: 300px;
   background-color: #f5f5f5;
@@ -171,15 +199,10 @@
 }
 
 
-.horizontal-align {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  width: fit-content;
-}
+
 
 .tokens {
-  width: 100%;
+ 
   padding-top: 20px;
   font-size: 14px;
 }
@@ -196,13 +219,19 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  margin-right: 10px;
+}
+.text-lh-sm {
+  line-height: 21px;
 }
 
 .icon img {
   width: 19.52px;
   height: 19.52px;
   object-fit: contain;
+}
+
+.text-primary {
+  color: black;
 }
 
 .text-secondary {

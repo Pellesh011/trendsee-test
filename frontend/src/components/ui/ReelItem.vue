@@ -41,28 +41,28 @@
                             <div class="image-container">
                                 <img src="@/assets/images/icons/views.svg" alt="Картинка 1">
                             </div>
-                            <div class="stats caption regular">42</div>
+                            <div class="stats caption text-lh-caption regular">42</div>
                         </div>
 
                         <div class="column">
                             <div class="image-container">
                                 <img src="@/assets/images/icons/likes.svg" alt="Картинка 2">
                             </div>
-                            <div class="stats caption regular">128</div>
+                            <div class="stats caption text-lh-caption regular">128</div>
                         </div>
 
                         <div class="column">
                             <div class="image-container">
                                 <img src="@/assets/images/icons/comments.svg" alt="Картинка 3">
                             </div>
-                            <div class="stats caption regular">7</div>
+                            <div class="stats caption text-lh-caption regular">7</div>
                         </div>
 
                         <div class="column">
                             <div class="image-container">
                                 <img src="@/assets/images/icons/shares.svg" alt="Картинка 4">
                             </div>
-                            <div class="stats caption regular">256</div>
+                            <div class="stats caption text-lh-caption regular">256</div>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                 <div class="blogger-body">
                     <div class="grid">
                         <a href="#" class="text-brand  heading-6 semibold">{{ username }}</a>
-                        <span class="action-small regular">{{ followers }}</span>
+                        <span class="action-small regular text-secondary">{{ followers }}</span>
                     </div>
 
                 </div>
@@ -90,10 +90,10 @@
 
         </div>
         <div class="container video-card-desc-short">
-            <p v-html="desc" class="text-secondary caption regular"></p>
+            <p v-html="desc" class="text-secondary caption text-lh-caption regular"></p>
         </div>
-        <div class="container grid">
-            <p class="text-secondary-inverse caption regular">{{ date }}</p>
+        <div class="container bottom-btn  grid">
+            <p class="text-secondary-inverse caption text-lh-caption regular">{{ date }}</p>
             <button class="primary background-default">Анализ</button>
         </div>
     </div>
@@ -125,6 +125,12 @@ const {
 .video-actions {
     position: absolute;
    
+}
+
+.bottom-btn{
+    position: absolute;
+    bottom: 10px;
+    width: calc(100% - 10px);
 }
 
 .video-cart {
@@ -175,7 +181,7 @@ const {
     height: 40px;
 }
 .blogger-body{
-    padding-left: 10px;
+    padding-left: 6px;
 }
 
 .user-avatar {
