@@ -120,18 +120,11 @@ const {
 </script>
 
 <style scoped>
-.panel {
-    width: 100%;
-    justify-content: space-between;
-}
-
-
 
 
 .video-actions {
     position: absolute;
-    /* width: 100%; */
-    display: flex;
+   
 }
 
 .video-cart {
@@ -204,15 +197,7 @@ const {
     ;
 }
 
-.video-actions .left-panel {
-    padding-left: 10px;
-    padding-top: 10px;
-}
 
-.video-actions .right-panel {
-    padding-right: 10px;
-    padding-top: 10px;
-}
 
 .icon-button-sm {
     display: flex;

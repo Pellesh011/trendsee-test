@@ -56,6 +56,16 @@ button {
   --text-secondary-inverse: #A0ADB4;
   --components-button-primary-background-default: #2B31B3;
   --White-100: #FFFFFF;
+  --text-tertiary: #83939C;
+  --backgroud-tertiary: #E6E8EA;
+  --background-brand-subtle: #D5D6F8;
+
+}
+.background-tertiary {
+  background-color: var(--backgroud-tertiary, #E6E8EA);
+}
+.background-brand-subtle{
+  background-color: var(--background-brand-subtle, #D5D6F8);
 }
 
 p {
@@ -66,6 +76,9 @@ p {
     display: flex;
 }
 
+.bold {
+  font-weight: 700;
+}
 
 
 button.primary.background-default {
@@ -96,6 +109,7 @@ button.primary.background-default {
 .heading-6 {
   font-size: 14px;
   letter-spacing: 0.1px;
+  line-height: 21px;
 }
 
 .caption {
@@ -109,6 +123,11 @@ button.primary.background-default {
   line-height: 16px;
   letter-spacing: 0.4px;
 }
+.body-medium {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
 
 .regular {
   font-weight: 500;
@@ -120,4 +139,30 @@ button.primary.background-default {
 
 .black-40 {
   background: var(--Black-40, #00000066);
+}
+.panel {
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    
+}
+.left-panel {
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.right-panel {
+    padding-right: 10px;
+    padding-top: 10px;
+}
+.body-medium {
+  font-weight: 500;
+}
+
+.caption {
+  font-size: 12px;
+}
+
+.bold {
+  font-weight: bold;
 }
