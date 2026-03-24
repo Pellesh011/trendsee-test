@@ -87,7 +87,6 @@
                     <img src="@/assets/images/icons/blogger-follow.png" alt="Follow">
                 </button>
             </div>
-
         </div>
         <div class="container video-card-desc-short">
             <p v-html="desc" class="text-secondary caption text-lh-caption regular"></p>

@@ -3,7 +3,7 @@
     <div class="logo">
       <div class="panel">
         <div class=""><img src="@/assets/images/logo.svg" alt="Trendsee Logo" /></div>
-        <div class=""><img src="@/assets/images/icons/toggle-side-menu.svg" alt="Trendsee Logo" /></div>
+        <div class=""><img src="@/assets/images/icons/toggle-side-menu.svg" class="in" alt="Trendsee Logo" /></div>
       </div>
 
     </div>
@@ -126,22 +126,98 @@
         <a class="horizontal-align" href="">
           <span class="text-tertiary body-small body-medium">Creative +</span>
           <span class="icon-7-13  flex-content-right">
-            <img src="@/assets/images/icons/right.svg" alt="Icon">
+            <img src="@/assets/images/icons/right-btn.svg" alt="Icon">
           </span>
         </a>
       </div>
 
     </div>
+    <div class="blogger-card container  mt-10">
+      <div class="flex">
+        <div class="blogger-avatar">
+          <img src="@/assets/images/utils/blogger-avatar.jpg" alt="User Avatar" class="user-avatar">
+        </div>
+        <div class="blogger-body">
+          <div class="grid">
+            <p class="text-secondary  body-small medium">Александра</p>
+            <span class="caption regular text-secondary-inverse mt-5">+7 (999) 999-99-99</span>
+          </div>
 
-
+        </div>
+      </div>
+      <div class="height-100">
+        <button class="blogger-follow mt-10" type="button" title="Follow">
+          <img src="@/assets/images/icons/toggle-side-menu.svg" class="exit" alt="exit">
+        </button>
+      </div>
+    </div>
+    <div class="container horizontal-align mt-10">
+            <span class="icon  icon-16">
+              <img src="@/assets/images/icons/RU.svg" alt="Icon">
+            </span>
+            <span class="text-tertiary  caption ">RU</span>
+            <span class="icon  icon-16 ">
+              <img src="@/assets/images/icons/arrow-down.svg" alt="Icon" class="">
+            </span>
+          </div>
   </div>
 </template>
 
-<script setup lang="ts">
-// Moved from src/components/Sidebar.vue
-</script>
 
+<script setup  lang="ts">
+const {
+  image = '/src/assets/images/utils/video-preview.png',
+  desc = '500 000 лайков на ютубе делаем, <br>бля буду скидываю 😘',
+  username = '@blogerich',
+  followers = '384.5K',
+  likes = '105K',
+  comments = '485',
+  date = '12.12.2025'
+} = defineProps<{
+  image?: string
+  desc?: string
+  username?: string
+  followers?: string
+  likes?: string
+  comments?: string
+  date?: string
+}>();
+</script>
 <style scoped>
+img.exit[src$="toggle-side-menu.svg"] {
+  transform: rotate(180deg);
+}
+
+img.in[src$="toggle-side-menu.svg"] {
+  transform: none;
+}
+
+img.out[src$="toggle-side-menu.svg"] {
+  transform: rotate(180deg);
+}
+
+.blogger-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blogger-avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.blogger-body {
+  padding-left: 6px;
+}
+
+.user-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 128px;
+  border: 1px solid var(--White-100, #FFFFFF);
+}
+
 .tokens-slide-bar {
   width: 100%;
   height: 10px;
@@ -236,8 +312,7 @@
 }
 
 .icon img {
-  width: 19.52px;
-  height: 19.52px;
+
   object-fit: contain;
 }
 
@@ -245,10 +320,6 @@
   color: black;
 }
 
-.text-secondary {
-  color: #666;
-  font-size: 16px;
-}
 
 .badger {
   font-size: 12px;
