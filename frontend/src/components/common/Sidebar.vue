@@ -115,20 +115,20 @@
           <img src="@/assets/images/icons/fire.svg" alt="Icon">
         </span>
         <span class="body-small italic bold">Токены</span>
-        <span class="background-tertiary body-small text-lh-caption bold flex-content-right">1 245 / 4 497</span>
+        <span class="body-small text-lh-caption bold flex-content-right">1 245 / 4 497</span>
       </div>
       <div class="tokens-slide-bar mt-5">
         <div class="tokens-slide-bar-full">
           <div class="tokens-slide-bar-filled"></div>
         </div>
       </div>
-      <div class="horizontal-align mt-10">
-        <span class="text-tertiary body-small body-medium">Creative +</span>
-        <span class="icon-7-13  flex-content-right">
-          <a href="">
+      <div class=" mt-10">
+        <a class="horizontal-align" href="">
+          <span class="text-tertiary body-small body-medium">Creative +</span>
+          <span class="icon-7-13  flex-content-right">
             <img src="@/assets/images/icons/right.svg" alt="Icon">
-          </a>
-        </span>
+          </span>
+        </a>
       </div>
 
     </div>
@@ -214,7 +214,6 @@
 
 .tokens {
 
-  padding-top: 20px;
   font-size: 14px;
 }
 
