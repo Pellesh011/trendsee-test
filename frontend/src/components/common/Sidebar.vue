@@ -5,7 +5,7 @@
         <div class=""><img src="@/assets/images/logo.svg" alt="Trendsee Logo" /></div>
         <div class=""><img src="@/assets/images/icons/toggle-side-menu.svg" alt="Trendsee Logo" /></div>
       </div>
-      
+
     </div>
     <nav>
       <ul class="side-menu">
@@ -47,7 +47,7 @@
           </a>
         </li>
 
-        <li class="sub-menu"><a >Работа с соцсетями</a></li>
+        <li class="sub-menu"><a>Работа с соцсетями</a></li>
         <li class="sub-menu-item">
           <a href="/crosspost" class="horizontal-align">
             <span class="icon  icon-16">
@@ -64,7 +64,7 @@
             <span class="text-secondary  body-medium">Чат боты</span>
           </a>
         </li>
-        <li class="sub-menu"><a >Инструменты</a></li>
+        <li class="sub-menu"><a>Инструменты</a></li>
         <li class="sub-menu-item">
           <a href="/ai" class="horizontal-align">
             <span class="icon  icon-16">
@@ -107,13 +107,18 @@
             <span class="background-tertiary badger caption bold text-secondary">скоро</span>
           </a>
         </li>
-
-
       </ul>
     </nav>
-    <div class="tokens">
-      <p>Токены: <span>1 245 / 4 497</span></p>
+    <div class="tokens horizontal-align">
+      <span class="icon  icon-16">
+        <img src="@/assets/images/icons/fire.svg" alt="Icon">
+      </span>
+      <span class="text-secondary  body-medium">Токены</span>
+      <span class="background-tertiary caption bold text-secondary">1 245 / 4 497</span>
     </div>
+
+
+
   </div>
 </template>
 
@@ -135,9 +140,11 @@
   padding: 0px;
   flex: 1;
 }
-.sidebar nav ul li{
+
+.sidebar nav ul li {
   padding: 4px 0px;
 }
+
 .sidebar nav ul li a {
 
   padding: 0px;
@@ -145,6 +152,7 @@
   color: #333;
   border-radius: 4px;
 }
+
 .sidebar .side-menu {
   margin-top: 0px;
 }
@@ -166,13 +174,12 @@
 .horizontal-align {
   display: flex;
   align-items: center;
-  padding: 15px 20px;
-
   text-decoration: none;
   width: fit-content;
 }
 
 .tokens {
+  width: 100%;
   padding-top: 20px;
   font-size: 14px;
 }
@@ -211,6 +218,4 @@
   min-width: 20px;
   text-align: center;
 }
-
-
 </style>
