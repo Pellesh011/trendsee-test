@@ -237,27 +237,6 @@ const {
     margin-left: 4px;
 }
 
-.icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.icon-20 {
-    width: 20px;
-    height: 20px;
-}
-
-.icon-16 {
-    width: 16px;
-    height: 16px;
-}
-
-.icon img {
-    max-width: 100%;
-    max-height: 100%;
-}
-
 .video-statistics {
     display: flex;
     justify-content: space-between;

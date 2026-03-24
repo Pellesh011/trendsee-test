@@ -109,21 +109,25 @@
         </li>
       </ul>
     </nav>
-    <div class="tokens horizontal-align">
-      
-      <span class="body-small italic bold">Токены</span>
-      <span class="background-tertiary body-small text-lh-caption bold flex-content-right">1 245 / 4 497</span>
-    </div>
-    <div class="tokens-slide-bar">
-      <div class="tokens-slide-bar-full">
-        <div class="tokens-slide-bar-filled"></div>
+    <div class="layout bg-white">
+      <div class="tokens horizontal-align">
+        <span class="body-small italic bold">Токены</span>
+        <span class="background-tertiary body-small text-lh-caption bold flex-content-right">1 245 / 4 497</span>
       </div>
-    </div>
-    <div class="tokens horizontal-align">
-      <span class="body-small italic bold">Creative +</span>
-      <span class="icon  icon-16  flex-content-right">
-        <img src="@/assets/images/icons/fire.svg" alt="Icon">
-      </span>
+      <div class="tokens-slide-bar mt-5">
+        <div class="tokens-slide-bar-full">
+          <div class="tokens-slide-bar-filled"></div>
+        </div>
+      </div>
+      <div class="horizontal-align mt-10">
+        <span class="text-tertiary body-small body-medium">Creative +</span>
+        <span class="icon-7-13  flex-content-right">
+          <a href="">
+            <img src="@/assets/images/icons/right.svg" alt="Icon">
+          </a>
+        </span>
+      </div>
+
     </div>
 
 
@@ -135,26 +139,30 @@
 </script>
 
 <style scoped>
-.tokens-slide-bar{
+.tokens-slide-bar {
   width: 100%;
-  height:10px;
+  height: 10px;
 }
-.tokens-slide-bar-full{
+
+.tokens-slide-bar-full {
   border: 1px solid transparent;
   border-radius: 8px;
   height: 100%;
   background-color: var(--backgroud-tertiary, #E6E8EA);
 }
-.tokens-slide-bar-filled{
-  width:40%;
+
+.tokens-slide-bar-filled {
+  width: 40%;
   border: 1px solid transparent;
   border-radius: 8px;
   height: 100%;
   background-color: var(--text-brand-medium, #E6E8EA);
 }
-.sidebar .sub-menu-item  .menu-text {
+
+.sidebar .sub-menu-item .menu-text {
   margin-left: 10px;
 }
+
 .sidebar {
   min-width: 300px;
   background-color: #f5f5f5;
@@ -170,7 +178,7 @@
 }
 
 .sidebar nav ul li {
-  padding: 4px 0px;
+  padding: 4px 10px;
 }
 
 .sidebar nav ul li a {
@@ -202,7 +210,7 @@
 
 
 .tokens {
- 
+
   padding-top: 20px;
   font-size: 14px;
 }
@@ -220,6 +228,7 @@
   width: 32px;
   height: 32px;
 }
+
 .text-lh-sm {
   line-height: 21px;
 }
