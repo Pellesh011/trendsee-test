@@ -26,7 +26,9 @@
             <div class="container  flex flex-full-width mt-5">
               <p class="text-secondary-inverse caption text-lh-caption regular">{{ modalStore.activePost?.date || new
                 Date().toLocaleDateString() }}</p>
-                  <img src="@/assets/images/icons/open.svg" alt="open" class="mt-5">
+              <a href="">
+                <img src="@/assets/images/icons/open.svg" alt="open" class="mt-5">
+              </a>
             </div>
             <div class="blogger-card container">
               <div class="flex">
@@ -39,7 +41,6 @@
                     <span class="action-small regular text-secondary">{{ modalStore.activePost?.followers || ''
                     }}</span>
                   </div>
-
                 </div>
               </div>
               <div class="height-100 mt-10">
@@ -49,9 +50,62 @@
               </div>
             </div>
             <div class="container video-card-desc-short mt-10">
-               <Expand v-model="modalStore.activePost.desc" :maxCollapsedHeight="16" :transitionMs="250" />
-             
-              
+              <Expand v-model="modalStore.activePost.desc" :maxCollapsedHeight="16" :transitionMs="250" />
+            </div>
+            <div class="mt-10">
+              <div class="horizontal-align flex-full-width backgroud-secondary modal-stat-item ">
+                <div class="horizontal-align ">
+                  <div class="icon  icon-16">
+                    <img src="@/assets/images/icons/views.svg" alt="views" class="color-filter-blue">
+                  </div>
+                  <span class="caption text-lh-caption regular gray-8  ml-10">Просмотры</span>
+                </div>
+                <span class="text-secondary body-small gray-7 ">1,2 млн</span>
+              </div>
+            </div>
+            <div class="mt-5">
+              <div class="horizontal-align flex-full-width backgroud-secondary modal-stat-item ">
+                <div class="horizontal-align ">
+                  <div class="icon  icon-16">
+                    <img src="@/assets/images/icons/likes.svg" alt="views" class="color-filter-electic-crimson">
+                  </div>
+                  <span class="caption text-lh-caption regular gray-8  ml-10">Лайки</span>
+                </div>
+                <span class="text-secondary body-small gray-7 ">1,2 млн</span>
+              </div>
+            </div>
+            <div class="mt-5">
+              <div class="horizontal-align flex-full-width backgroud-secondary modal-stat-item ">
+                <div class="horizontal-align ">
+                  <div class="icon  icon-16">
+                    <img src="@/assets/images/icons/comments.svg" alt="views" class="color-filter-green-bell-pepper">
+                  </div>
+                  <span class="caption text-lh-caption regular gray-8  ml-10">Комментарии</span>
+                </div>
+                <span class="text-secondary body-small gray-7 ">1,2 млн</span>
+              </div>
+            </div>
+            <div class="mt-5">
+              <div class="horizontal-align flex-full-width backgroud-secondary modal-stat-item ">
+                <div class="horizontal-align ">
+                  <div class="icon  icon-16">
+                    <img src="@/assets/images/icons/shares.svg" alt="views" class="color-filter-lucky-orange">
+                  </div>
+                  <span class="caption text-lh-caption regular gray-8  ml-10">Репосты</span>
+                </div>
+                <span class="text-secondary body-small gray-7 ">1,2 млн</span>
+              </div>
+            </div>
+            <div class="mt-5">
+              <div class="horizontal-align flex-full-width backgroud-secondary modal-stat-item ">
+                <div class="horizontal-align ">
+                  <div class="icon  icon-16">
+                    <img src="@/assets/images/icons/er.svg" alt="views" class="">
+                  </div>
+                  <span class="caption text-lh-caption regular gray-8  ml-10">ER</span>
+                </div>
+                <span class="text-secondary body-small gray-7 ">1,2 млн</span>
+              </div>
             </div>
           </div>
         </div>
@@ -189,18 +243,13 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
   flex-wrap: wrap;
 }
 
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
+.modal-stat-item {
+  padding: 10px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 8px;
 }
 
-.stat-item img {
-  width: 24px;
-  height: 24px;
-}
 
 .modal-blogger {
   display: flex;
@@ -293,9 +342,7 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
   display: block;
 }
 
-.video-card-desc-short {
-
-}
+.video-card-desc-short {}
 
 .blogger-card {
   display: flex;
