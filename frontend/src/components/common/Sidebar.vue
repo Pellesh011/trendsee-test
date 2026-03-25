@@ -152,19 +152,19 @@
       </div>
     </div>
     <div class="container horizontal-align mt-10">
-            <span class="icon  icon-16">
-              <img src="@/assets/images/icons/RU.svg" alt="Icon">
-            </span>
-            <span class="text-tertiary  caption ">RU</span>
-            <span class="icon  icon-16 ">
-              <img src="@/assets/images/icons/arrow-down.svg" alt="Icon" class="">
-            </span>
-          </div>
+      <span class="icon  icon-16">
+        <img src="@/assets/images/icons/RU.svg" alt="Icon">
+      </span>
+      <span class="text-tertiary  caption ">RU</span>
+      <span class="icon  icon-16 ">
+        <img src="@/assets/images/icons/arrow-down.svg" alt="Icon" class="">
+      </span>
+    </div>
   </div>
 </template>
 
 
-<script setup  lang="ts">
+<script setup lang="ts">
 const {
   image = '/src/assets/images/utils/video-preview.png',
   desc = '500 000 лайков на ютубе делаем, <br>бля буду скидываю 😘',

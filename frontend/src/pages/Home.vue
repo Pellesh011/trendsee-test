@@ -4,13 +4,8 @@
       <ReelItem
         v-for="post in postsStore.posts"
         :key="post.id"
-        :image="post.image"
-        :stats="post.stats"
-        :desc="post.desc"
-        :username="post.username"
-        :followers="post.followers"
-        :likes="post.stats[0]"
-        :comments="post.stats[3]"
+        :post="post"
+        @open-reel="modalStore.openPost($event)"
       />
     </div>
     <button class="find-more-btn" @click="postsStore.loadMore" :disabled="postsStore.loading">
@@ -22,10 +17,12 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { usePostsStore } from '@/stores/posts';
+import { useModalStore } from '@/stores/modal';
 import ReelItem from '@/components/ui/ReelItem.vue';
 import type { Post } from '@/types/post';
 
 const postsStore = usePostsStore();
+const modalStore = useModalStore();
 
 onMounted(() => {
   // Initial load if needed

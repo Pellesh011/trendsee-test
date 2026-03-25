@@ -1,5 +1,5 @@
 <template>
-    <div class="video-cart">
+    <div class="video-cart" @click="handleClick" role="button" tabindex="0">
         <div class="video-content">
             <div class="video-actions panel">
 
@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <img :src="image" alt="Post Image" class="post-image">
+            <img :src="post.image" alt="Post Image" class="post-image">
         </div>
         <div class="blogger-card container">
             <div class="flex">
@@ -76,8 +76,8 @@
                 </div>
                 <div class="blogger-body">
                     <div class="grid">
-                        <a href="#" class="text-brand  heading-6 semibold">{{ username }}</a>
-                        <span class="action-small regular text-secondary">{{ followers }}</span>
+                        <a href="#" class="text-brand  heading-6 semibold">{{ post.username }}</a>
+                        <span class="action-small regular text-secondary">{{ post.followers }}</span>
                     </div>
 
                 </div>
@@ -89,33 +89,32 @@
             </div>
         </div>
         <div class="container video-card-desc-short">
-            <p v-html="desc" class="text-secondary caption text-lh-caption regular"></p>
+            <p v-html="post.desc" class="text-secondary caption text-lh-caption regular"></p>
         </div>
         <div class="container bottom-btn  grid">
-            <p class="text-secondary-inverse caption text-lh-caption regular">{{ date }}</p>
+            <p class="text-secondary-inverse caption text-lh-caption regular">{{ post.date || new Date().toLocaleDateString() }}</p>
             <button class="primary background-default">Анализ</button>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-const {
-    image = '/src/assets/images/utils/video-preview.png',
-    desc = '500 000 лайков на ютубе делаем, <br>бля буду скидываю 😘',
-    username = '@blogerich',
-    followers = '384.5K',
-    likes = '105K',
-    comments = '485',
-    date = '12.12.2025'
-} = defineProps<{
-    image?: string
-    desc?: string
-    username?: string
-    followers?: string
-    likes?: string
-    comments?: string
-    date?: string
+import { defineEmits } from 'vue';
+import type { Post } from '@/types/post';
+
+interface Props {
+  post: Post;
+}
+
+const props = withDefaults(defineProps<Props>(), {});
+
+const emit = defineEmits<{
+  (e: 'open-reel', post: Post): void;
 }>();
+
+const handleClick = () => {
+  emit('open-reel', props.post);
+};
 </script>
 
 <style scoped>
