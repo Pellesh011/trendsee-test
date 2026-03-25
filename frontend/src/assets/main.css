@@ -64,7 +64,7 @@ button {
   --backgroud-secondary:#F4F5F6;
 
 }
-.backgroud-secondary{
+.background-secondary{
   background-color: var(--backgroud-secondary);
 }
 .gray-8{

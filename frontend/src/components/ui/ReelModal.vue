@@ -53,7 +53,7 @@
               <Expand v-model="modalStore.activePost.desc" :maxCollapsedHeight="16" :transitionMs="250" />
             </div>
             <div class="mt-10">
-              <div class="horizontal-align flex-full-width backgroud-secondary modal-stat-item ">
+              <div class="horizontal-align flex-full-width background-secondary modal-stat-item ">
                 <div class="horizontal-align ">
                   <div class="icon  icon-16">
                     <img src="@/assets/images/icons/views.svg" alt="views" class="color-filter-blue">
@@ -64,7 +64,7 @@
               </div>
             </div>
             <div class="mt-5">
-              <div class="horizontal-align flex-full-width backgroud-secondary modal-stat-item ">
+              <div class="horizontal-align flex-full-width background-secondary modal-stat-item ">
                 <div class="horizontal-align ">
                   <div class="icon  icon-16">
                     <img src="@/assets/images/icons/likes.svg" alt="views" class="color-filter-electic-crimson">
@@ -75,7 +75,7 @@
               </div>
             </div>
             <div class="mt-5">
-              <div class="horizontal-align flex-full-width backgroud-secondary modal-stat-item ">
+              <div class="horizontal-align flex-full-width background-secondary modal-stat-item ">
                 <div class="horizontal-align ">
                   <div class="icon  icon-16">
                     <img src="@/assets/images/icons/comments.svg" alt="views" class="color-filter-green-bell-pepper">
@@ -86,7 +86,7 @@
               </div>
             </div>
             <div class="mt-5">
-              <div class="horizontal-align flex-full-width backgroud-secondary modal-stat-item ">
+              <div class="horizontal-align flex-full-width background-secondary modal-stat-item ">
                 <div class="horizontal-align ">
                   <div class="icon  icon-16">
                     <img src="@/assets/images/icons/shares.svg" alt="views" class="color-filter-lucky-orange">
@@ -97,7 +97,7 @@
               </div>
             </div>
             <div class="mt-5">
-              <div class="horizontal-align flex-full-width backgroud-secondary modal-stat-item ">
+              <div class="horizontal-align flex-full-width background-secondary modal-stat-item ">
                 <div class="horizontal-align ">
                   <div class="icon  icon-16">
                     <img src="@/assets/images/icons/er.svg" alt="views" class="">
@@ -116,24 +116,7 @@
         </button>
         <div class="modal-content">
           <div v-html="modalStore.activePost?.desc || ''" class="modal-desc"></div>
-          <div class="modal-stats">
-            <div class="stat-item">
-              <img src="@/assets/images/icons/views.svg" alt="Views">
-              <span>{{ modalStore.activePost?.stats?.[0] || '0' }}</span>
-            </div>
-            <div class="stat-item">
-              <img src="@/assets/images/icons/likes.svg" alt="Likes">
-              <span>{{ modalStore.activePost?.stats?.[1] || '0' }}</span>
-            </div>
-            <div class="stat-item">
-              <img src="@/assets/images/icons/comments.svg" alt="Comments">
-              <span>{{ modalStore.activePost?.stats?.[2] || '0' }}</span>
-            </div>
-            <div class="stat-item">
-              <img src="@/assets/images/icons/shares.svg" alt="Shares">
-              <span>{{ modalStore.activePost?.stats?.[3] || '0' }}</span>
-            </div>
-          </div>
+          
 
         </div>
       </div>
@@ -184,11 +167,7 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
   min-width: 0;
 }
 
-.modal-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+
 
 .reel-modal-right {
   flex: 1;
@@ -251,40 +230,13 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
 }
 
 
-.modal-blogger {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #eee;
-}
 
-.blogger-avatar-large {
-  width: 60px;
-  height: 60px;
-}
 
-.user-avatar-large {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 2px solid white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
 
-.blogger-info a {
-  color: #1a73e8;
-  text-decoration: none;
-}
 
-.follow-btn-large {
-  margin-left: auto;
-  padding: 0.75rem 1.5rem;
-  background: #f8f9fa;
-  border: 1px solid #ddd;
-  border-radius: 25px;
-  cursor: pointer;
-}
+
+
+
 
 @media (max-width: 768px) {
   .reel-modal {
@@ -306,11 +258,7 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
 
 }
 
-.bottom-btn {
-  position: absolute;
-  bottom: 10px;
-  width: calc(100% - 10px);
-}
+
 
 .video-cart {
 
@@ -394,62 +342,15 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
   margin-bottom: 4px;
 }
 
-.icon-button-lg {
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  gap: 8px;
-  background-color: var(--Black-40, #00000066);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 12px;
-  margin-bottom: 4px;
-}
+
 
 .icon-button span.text {
   margin-left: 4px;
 }
 
-.video-statistics {
-  display: flex;
-  justify-content: space-between;
-  max-width: 254px;
-  margin: 0 auto;
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-}
 
-.video-statistics-container {
-  margin: 10px;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  width: 100%;
-  backdrop-filter: blur(8px);
-  background-color: var(--Black-40, #00000066);
-}
 
-.video-statistics .stats {
 
-  color: white;
-  padding-bottom: 5px;
-}
 
-.column {
-  flex: 1;
-  padding: 0px;
-  text-align: center;
-}
 
-.image-container {
-  width: 100%;
-  padding: 5px;
-}
-
-.image-container img {
-  width: 20px;
-  height: 20px;
-}
 </style>
