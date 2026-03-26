@@ -71,6 +71,10 @@ button {
   --danger-bold: #BF0031;
 }
 
+.background-secondary{
+  background-color: var(--backgroud-secondary);
+}
+
 .success-bold {
   color: var(--success-bold)
 }

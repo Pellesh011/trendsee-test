@@ -1,20 +1,31 @@
 <template>
-  <div class="expand-container">
-    <div
-      class="expand-content"
-      :style="contentStyle"
-      ref="contentWrapper"
-      :aria-expanded="isOpen.toString()"
-    >
+  <div class="expand-container" :class=" background">
+    <div class="expand-content" :style="contentStyle" ref="contentWrapper" :aria-expanded="isOpen.toString()">
       <slot>
         <!-- fallback content -->
         <p class="caption gray-8 text-lh-caption regular" v-html="modelValue"></p>
       </slot>
     </div>
 
-    <button class="expand-button action-small semibold black" @click="toggle">
-      {{ isOpen ? 'Свернуть' : 'Ещё' }}
-    </button>
+    <div class="horizontal-align expand-btn">
+
+      <button class="expand-button action-small semibold black flex" :class="expandBtnAlign" @click="toggle">
+        <div v-if="expandIcon">
+          <div class=" icon-16">
+            <div v-if="isOpen">
+              <img :src="`src/assets/images/icons/arrow-down.svg`" alt="views" class="rotate-180">
+            </div>
+            <div v-if="!isOpen">
+              <img :src="`src/assets/images/icons/arrow-down.svg`" alt="views">
+            </div>
+
+          </div>
+        </div>
+        {{ isOpen ? 'Свернуть' : 'Ещё' }}
+      </button>
+
+    </div>
+
   </div>
 </template>
 
@@ -25,9 +36,13 @@ interface Props {
   modelValue?: string
   maxCollapsedHeight?: number
   transitionMs?: number
+  classes?: string
+  expandBtnAlign?: 'right' | 'left'
+  expandIcon?: boolean
+  background?: string
 }
 
-const props = defineProps<Props & { modelValue: string; expandIcon: string; expandBtnAlign: 'right'|'left', classes: string}>()
+const props = defineProps<Props & { modelValue: string; expandIcon: boolean; expandBtnAlign: 'right' | 'left', classes: string , background: string}>()
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
 }>()
@@ -45,7 +60,6 @@ const contentStyle = computed(() => {
   return {
     height,
     overflow: 'hidden',
-    transition: `height ${transitionMs}ms ease`,
   } as Record<string, string>
 })
 
@@ -86,12 +100,20 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
+.pad-20{
+  padding: 20px;
+}
+
 .expand-container {
   width: 100%;
 }
+.rotate-180{
+  transform: rotateX(180deg);
+}
 
-.expand-content {
-  /* height/overflow/transition managed via inline style */
+.expand-btn {
+ height: 20px;
 }
 
 .expand-button {
@@ -108,8 +130,8 @@ onMounted(() => {
   margin: 0;
 }
 
-.right-btn{
+.right {
   position: absolute;
-  right: 0px;
+  right: 30px;
 }
 </style>
