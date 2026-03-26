@@ -57,30 +57,36 @@ button {
   --components-button-primary-background-default: #2B31B3;
   --White-100: #FFFFFF;
   --text-tertiary: #83939C;
+  --text-primary: #000000;
   --backgroud-tertiary: #E6E8EA;
   --background-brand-subtle: #D5D6F8;
   --gray-8: #343A40;
   --gray-7: #393C4C;
-  --backgroud-secondary:#F4F5F6;
+  --backgroud-secondary: #F4F5F6;
 
 }
-.background-secondary{
+
+.background-secondary {
   background-color: var(--backgroud-secondary);
 }
-.gray-8{
+
+.gray-8 {
   color: var(--gray-8);
 }
 
-.gray-7{
+.gray-7 {
   color: var(--gray-7);
 }
+
 .background-tertiary {
   background-color: var(--backgroud-tertiary, #E6E8EA);
 }
+
 .text-tertiary {
   color: var(--text-tertiary, #E6E8EA);
 }
-.background-brand-subtle{
+
+.background-brand-subtle {
   background-color: var(--background-brand-subtle, #D5D6F8);
 }
 
@@ -89,16 +95,18 @@ p {
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .bold {
   font-weight: 700;
 }
 
+.text-primary {
+  color: var(--text-primary);
+}
 
-button.primary.background-default {
-  background-color: var(--components-button-primary-background-default, #2B31B3);
+button.primary{
   color: #f8f9fa;
   width: 100%;
   height: 40px;
@@ -106,6 +114,11 @@ button.primary.background-default {
   font-size: 14px;
   z-index: 10;
   border-radius: 12px;
+}
+
+
+button.primary.background-default {
+  background-color: var(--components-button-primary-background-default, #2B31B3);
 }
 
 .text-brand {
@@ -120,6 +133,13 @@ button.primary.background-default {
 
 .grid {
   display: grid;
+}
+
+
+.heading-3 {
+  font-size: 24px;
+  letter-spacing: 0px;
+  line-height: 29px;
 }
 
 .heading-6 {
@@ -142,6 +162,7 @@ button.primary.background-default {
   line-height: 16px;
   letter-spacing: 0.4px;
 }
+
 .body-medium {
   font-size: 16px;
   line-height: 24px;
@@ -155,33 +176,40 @@ button.primary.background-default {
 .semibold {
   font-weight: 600;
 }
+
 .black {
   color: black;
 }
+
 .black-40 {
   background: var(--Black-40, #00000066);
 }
+
 .panel {
-    width: 100%;
-    justify-content: space-between;
-    display: flex;
-    
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+
 }
+
 .left-panel {
-    padding-left: 10px;
-    padding-top: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
 }
 
 .right-panel {
-    padding-right: 10px;
-    padding-top: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
 }
+
 .body-medium {
   font-weight: 500;
 }
+
 .italic {
   font-style: italic;
 }
+
 .body-small {
   font-size: 14px;
 }
@@ -191,161 +219,73 @@ button.primary.background-default {
   font-weight: bold;
 }
 
-.flex-content-right{
+.flex-content-right {
   margin-left: auto;
 }
+
 .horizontal-align {
   display: flex;
   align-items: center;
   text-decoration: none;
   width: fit-content;
-   width: 100%;
+  width: 100%;
 }
 
 
 .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon-20 {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .icon-16 {
-    width: 16px;
-    height: 16px;
+  width: 16px;
+  height: 16px;
 }
-.icon-7-13{
-    width: 7.5px;
-    height: 13.75px;
+
+.icon-7-13 {
+  width: 7.5px;
+  height: 13.75px;
 }
 
 .icon img {
-    max-width: 100%;
-    max-height: 100%;
-}
-.ml-10{
-  margin-left: 10px;
+  max-width: 100%;
+  max-height: 100%;
 }
 
-.mt-5{
+.ml-10 {
+  margin-left: 10px;
+}
+.ml-5 {
+  margin-left: 5px;
+}
+
+.mt-5 {
   margin-top: 5px;
 }
-.mt-10{
+
+.mt-10 {
   margin-top: 10px;
 }
 
-.layout{ 
+.layout {
   border: 1px solid transparent;
   border-radius: 8px;
   padding: 14px 15px;
 }
-.bg-white{
+
+.bg-white {
   background-color: white;
 }
 
-/* Reel Modal Styles */
-.reel-modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
 
-.reel-modal {
-  display: flex;
-  width: 95vw;
-  height: 90vh;
-  max-width: 1400px;
-  background: white;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-.reel-modal-left {
-  flex: 1;
-  min-width: 0;
-}
-
-.modal-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.reel-modal-right {
-  flex: 1;
-
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-close-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(0, 0, 0, 0.5);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  backdrop-filter: blur(10px);
-}
-
-.modal-close-btn:hover {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.modal-close-btn img {
-  width: 20px;
-  height: 20px;
-  filter: invert(1);
-}
-
-.modal-content {
-  flex: 1;
-  padding: 2rem;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.modal-desc {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #333;
-}
-
-.modal-stats {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
-}
 .flex-full-width {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .stat-item img {
@@ -403,13 +343,13 @@ button.primary.background-default {
     width: 95vw;
     height: 95vh;
   }
-  
+
   .reel-modal-right {
     max-width: none;
   }
 }
 
-.color-filter-blue{
+.color-filter-blue {
   filter: brightness(0) saturate(100%) invert(18%) sepia(93%) saturate(3212%) hue-rotate(235deg) brightness(87%) contrast(90%);
 }
 
@@ -417,10 +357,10 @@ button.primary.background-default {
   filter: brightness(0) saturate(100%) invert(42%) sepia(11%) saturate(5608%) hue-rotate(308deg) brightness(107%) contrast(101%);
 }
 
-.color-filter-green-bell-pepper{
+.color-filter-green-bell-pepper {
   filter: brightness(0) saturate(100%) invert(68%) sepia(67%) saturate(6529%) hue-rotate(71deg) brightness(98%) contrast(101%);
 }
 
-.color-filter-lucky-orange{
-filter: brightness(0) saturate(100%) invert(45%) sepia(96%) saturate(1677%) hue-rotate(1deg) brightness(93%) contrast(100%);
+.color-filter-lucky-orange {
+  filter: brightness(0) saturate(100%) invert(45%) sepia(96%) saturate(1677%) hue-rotate(1deg) brightness(93%) contrast(100%);
 }

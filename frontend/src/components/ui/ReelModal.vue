@@ -111,13 +111,32 @@
         </div>
       </div>
       <div class="reel-modal-right">
-        <button class="modal-close-btn" @click="modalStore.close">
-          ×
+        <button class="modal-close-btn background-secondary" @click="modalStore.close">
+          <img src="@/assets/images/icons/close.svg">
         </button>
         <div class="modal-content">
-          <div v-html="modalStore.activePost?.desc || ''" class="modal-desc"></div>
-          
+          <p class="text-secondary body-small">Тема видео</p>
+          <h3 v-html="modalStore.activePost?.desc || ''" class="text-primary heading-3 semibold"></h3>
+          <div class="flex">
+            <div class="background-secondary  music-item">
+              <div class="horizontal-align ">
+                <div class="icon  icon-16">
+                  <img src="@/assets/images/icons/music.svg" alt="views" class="">
+                </div>
+                <span class="action-small text-lh-caption regular ">Tyga – Pop it off</span>
+              </div>
+            </div>
 
+            <div class=" video-language-item ml-10">
+              <div class="horizontal-align ">
+                <span class="action-small text-secondary regular ">Язык: </span>
+                <div class="icon  icon-16 ml-10">
+                  <img src="@/assets/images/icons/RU.svg" alt="views" class="" height="14">
+                </div>
+                <span class="action-small text-secondary regular ml-5">Russian</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -139,6 +158,22 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
 </script>
 
 <style scoped>
+.video-language-item{
+    width: fit-content;
+  padding: 3.2px 8px;
+
+}
+.music-item {
+  width: fit-content;
+  padding: 3.2px 8px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+}
+
+.modal-content h3 {
+  margin: 10px 70px 10px 0px;
+}
+
 .reel-modal-overlay {
   position: fixed;
   inset: 0;
@@ -164,6 +199,7 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
 .reel-modal-left {
   flex: 1;
   max-width: 216px;
+  margin: 10px;
   min-width: 0;
 }
 
@@ -171,19 +207,23 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
 
 .reel-modal-right {
   flex: 1;
-
+  margin: 10px;
   position: relative;
   display: flex;
   flex-direction: column;
+}
+
+.modal-close-btn img {
+  width: 10px;
+  height: 10px;
 }
 
 .modal-close-btn {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: rgba(0, 0, 0, 0.5);
   border: none;
-  border-radius: 50%;
+  border-radius: 16px;
   width: 40px;
   height: 40px;
   display: flex;
@@ -191,23 +231,15 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  backdrop-filter: blur(10px);
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
+
 }
 
 .modal-close-btn:hover {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(179, 179, 179, 0.7);
 }
 
 .modal-content {
-  flex: 1;
-  padding: 2rem;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
 }
 
 .modal-desc {
@@ -268,7 +300,7 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
   flex-direction: column;
   gap: 4px;
   border-radius: 12px;
-  padding: 4px 4px 8px 4px;
+
   overflow: hidden;
   background-color: white;
   position: relative;
@@ -347,10 +379,4 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
 .icon-button span.text {
   margin-left: 4px;
 }
-
-
-
-
-
-
 </style>
