@@ -55,7 +55,7 @@ button {
   --text-secondary: #4E616B;
   --text-secondary-inverse: #A0ADB4;
   --components-button-primary-background-default: #2B31B3;
-  --White-100: #FFFFFF;
+  --white-100: #FFFFFF;
   --text-tertiary: #83939C;
   --text-primary: #000000;
   --backgroud-tertiary: #E6E8EA;
@@ -71,7 +71,11 @@ button {
   --danger-bold: #BF0031;
 }
 
-.background-secondary{
+.white {
+  color: var(--white-100);
+}
+
+.background-secondary {
   background-color: var(--backgroud-secondary);
 }
 
@@ -156,7 +160,7 @@ button.primary {
 }
 
 
-button.primary.background-default {
+button.background-default {
   background-color: var(--components-button-primary-background-default, #2B31B3);
 }
 
@@ -320,7 +324,17 @@ button.primary.background-default {
 .mt-10 {
   margin-top: 10px;
 }
+.mt-20 {
+  margin-top: 20px;
+}
 
+.mr-5{
+  margin-right: 5px;
+}
+
+.pad-20{
+  padding: 20px;
+}
 .layout {
   border: 1px solid transparent;
   border-radius: 8px;
@@ -392,8 +406,8 @@ button.primary.background-default {
   letter-spacing: 0.15px;
 }
 
-.pt-20{
- padding-top: 20px;
+.pt-20 {
+  padding-top: 20px;
 }
 
 
@@ -411,4 +425,16 @@ button.primary.background-default {
 
 .color-filter-lucky-orange {
   filter: brightness(0) saturate(100%) invert(45%) sepia(96%) saturate(1677%) hue-rotate(1deg) brightness(93%) contrast(100%);
+}
+
+.btn-big {
+  width: 220px;
+  padding: 16px;
+  gap: 8;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 18px;
+    letter-spacing: 0.25px;
+    
+    font-weight: 600;
 }

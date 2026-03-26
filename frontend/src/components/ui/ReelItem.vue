@@ -34,8 +34,6 @@
             </div>
             <div class="video-statistics">
                 <div class="video-statistics-container">
-
-
                     <div class="flex">
                         <div class="column">
                             <div class="image-container">
@@ -186,7 +184,7 @@ const handleClick = () => {
     width: 100%;
     height: 100%;
     border-radius: 128px;
-    border: 1px solid var(--White-100, #FFFFFF);
+    border: 1px solid var(--white-100, #FFFFFF);
 }
 
 .video-actions .btn {

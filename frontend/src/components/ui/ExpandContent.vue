@@ -3,14 +3,14 @@
     <div class="expand-content" :style="contentStyle" ref="contentWrapper" :aria-expanded="isOpen.toString()">
       <slot>
         <!-- fallback content -->
-        <p class="caption gray-8 text-lh-caption regular" v-html="modelValue"></p>
+        <p class=" regular" v-html="modelValue"></p>
       </slot>
     </div>
 
-    <div class="horizontal-align expand-btn">
+    <div class=" expand-btn">
 
-      <button class="expand-button action-small semibold black flex" :class="expandBtnAlign" @click="toggle">
-        <div v-if="expandIcon">
+      <button class="expand-button action-small semibold black flex " :class="expandBtnAlign" @click="toggle">
+        <div v-if="expandIcon" class="mr-5">
           <div class=" icon-16">
             <div v-if="isOpen">
               <img :src="`src/assets/images/icons/arrow-down.svg`" alt="views" class="rotate-180">
@@ -21,7 +21,9 @@
 
           </div>
         </div>
+        <span class="">
         {{ isOpen ? 'Свернуть' : 'Ещё' }}
+        </span>
       </button>
 
     </div>
@@ -37,12 +39,12 @@ interface Props {
   maxCollapsedHeight?: number
   transitionMs?: number
   classes?: string
-  expandBtnAlign?: 'right' | 'left'
+  expandBtnAlign?: string
   expandIcon?: boolean
   background?: string
 }
 
-const props = defineProps<Props & { modelValue: string; expandIcon: boolean; expandBtnAlign: 'right' | 'left', classes: string , background: string}>()
+const props = defineProps<Props & { modelValue: string; expandIcon: boolean; expandBtnAlign: string, classes: string , background: string}>()
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
 }>()
@@ -101,9 +103,6 @@ onMounted(() => {
 
 <style scoped>
 
-.pad-20{
-  padding: 20px;
-}
 
 .expand-container {
   width: 100%;

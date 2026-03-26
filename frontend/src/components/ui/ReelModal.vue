@@ -39,7 +39,7 @@
                   <div class="grid">
                     <a href="#" class="text-brand  heading-6 semibold">{{ modalStore.activePost?.username || '' }}</a>
                     <span class="action-small regular text-secondary">{{ modalStore.activePost?.followers || ''
-                      }}</span>
+                    }}</span>
                   </div>
                 </div>
               </div>
@@ -50,7 +50,8 @@
               </div>
             </div>
             <div class="container video-card-desc-short mt-10">
-              <Expand v-model="modalStore.activePost.desc" :maxCollapsedHeight="16" :transitionMs="250" />
+              <Expand v-model="modalStore.activePost.desc" :maxCollapsedHeight="16" :transitionMs="250" 
+               background="caption gray-8"/>
             </div>
             <div class="mt-10">
               <div class="horizontal-align flex-full-width background-secondary modal-stat-item ">
@@ -171,20 +172,35 @@
                 </div>
               </div>
               <button class="btn-mid background-secondary ml-10">
-                <img src="@/assets/images/icons/copy.svg" >
+                <img src="@/assets/images/icons/copy.svg">
               </button>
             </div>
           </div>
           <div class="mt-10">
-            <Expand 
-            v-model="transcridtionText"
-            :maxCollapsedHeight="140"
-            :transitionMs="250"
-            expandBtnAlign="right"
-            expandIcon="arrow-down"
-            background="background-secondary pad-20"
-            />
+            <Expand v-model="transcridtionText" :maxCollapsedHeight="140" :transitionMs="250" expandBtnAlign="flex-content-right"
+              expandIcon="arrow-down" background="background-secondary pad-20 body-small text-secondary " />
+          </div>
+          <button class="btn-big  background-default mt-20">
+            <div class="horizontal-align">
+              <div class="icon icon-16 ml-10">
+                <img src="@/assets/images/icons/magic.svg" alt="" class="">
+              </div>
+              <span class="white ml-10">
+                Адаптировать
+              </span>
+            </div>
+          </button>
 
+          <div class=" pt-20">
+            <div>
+              <h5 class="heading-5">Суть</h5>
+            </div>
+            <div class="background-secondary pad-20">
+                <p class="body-small text-secondary">
+                  Разбор состава/логики: он в человеческих словах переводит состав/механику (“что реально делает X”), называет 2–3 работающих активных компонента и 2–3 маркетинговых “пустых” обещания.
+                </p>
+
+            </div>
           </div>
         </div>
       </div>
@@ -196,7 +212,7 @@
 <script setup lang="ts">
 import { useModalStore } from '@/stores/modal';
 import type { Post } from '@/types/post';
-import {ref} from 'vue';
+import { ref } from 'vue';
 const modalStore = useModalStore();
 
 
@@ -238,12 +254,13 @@ const transcridtionText = ref(`SPF скатывается? Смотри — во
 </script>
 
 <style scoped>
-.btn-mid{
+.btn-mid {
   width: 32px;
   height: 32px;
   border: 1px solid transparent;
   border-radius: 12px;
 }
+
 .tag {
   border: 1px solid transparent;
   border-radius: 20px;
@@ -259,12 +276,14 @@ const transcridtionText = ref(`SPF скатывается? Смотри — во
   padding: 3.2px 8px;
 
 }
-.translated-item{
+
+.translated-item {
   width: fit-content;
   padding: 7px 8px;
   border: 1px solid transparent;
   border-radius: 12px;
 }
+
 .music-item {
   width: fit-content;
   padding: 3.2px 8px;
@@ -432,7 +451,7 @@ const transcridtionText = ref(`SPF скатывается? Смотри — во
   width: 100%;
   height: 100%;
   border-radius: 128px;
-  border: 1px solid var(--White-100, #FFFFFF);
+  border: 1px solid var(--white-100, #FFFFFF);
 }
 
 .video-actions .btn {
