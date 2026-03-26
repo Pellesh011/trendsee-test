@@ -59,11 +59,41 @@ button {
   --text-tertiary: #83939C;
   --text-primary: #000000;
   --backgroud-tertiary: #E6E8EA;
-  --background-brand-subtle: #D5D6F8;
   --gray-8: #343A40;
   --gray-7: #393C4C;
   --backgroud-secondary: #F4F5F6;
+  --brand-subtle: #D5D6F8;
+  --success-subtle: #E1F7D8;
+  --success-bold: #1E6D00;
+  --warning-subtle: #FFF0CB;
+  --warning-bold: #9E3F00;
+  --danger-subtle: #FFECF1;
+  --danger-bold: #BF0031;
+}
+.success-bold{
+  color: var(--success-bold)
+}
 
+.backgroud-success-subtle {
+  background-color: var(--success-subtle);
+}
+.warning-bold{
+  color: var(--warning-bold)
+}
+
+.backgroud-warning-subtle {
+  background-color: var(--warning-subtle);
+}
+.danger-bold{
+  color: var(--danger-bold)
+}
+
+.backgroud-danger-subtle {
+  background-color: var(--danger-subtle);
+}
+
+.brand-subtle{
+  color: var(--brand-subtle);
 }
 
 .background-secondary {
@@ -78,6 +108,8 @@ button {
   color: var(--gray-7);
 }
 
+
+
 .background-tertiary {
   background-color: var(--backgroud-tertiary, #E6E8EA);
 }
@@ -87,7 +119,7 @@ button {
 }
 
 .background-brand-subtle {
-  background-color: var(--background-brand-subtle, #D5D6F8);
+  background-color: var(--brand-subtle, #D5D6F8);
 }
 
 p {
@@ -119,6 +151,10 @@ button.primary{
 
 button.primary.background-default {
   background-color: var(--components-button-primary-background-default, #2B31B3);
+}
+
+.brand-medium{
+   color: var(--text-brand-medium, #2B31B3);
 }
 
 .text-brand {
@@ -257,7 +293,9 @@ button.primary.background-default {
   max-width: 100%;
   max-height: 100%;
 }
-
+.mr-10{
+  margin-right: 10px;
+}
 .ml-10 {
   margin-left: 10px;
 }
@@ -337,17 +375,6 @@ button.primary.background-default {
   background: #e9ecef;
 }
 
-@media (max-width: 768px) {
-  .reel-modal {
-    flex-direction: column;
-    width: 95vw;
-    height: 95vh;
-  }
-
-  .reel-modal-right {
-    max-width: none;
-  }
-}
 
 .color-filter-blue {
   filter: brightness(0) saturate(100%) invert(18%) sepia(93%) saturate(3212%) hue-rotate(235deg) brightness(87%) contrast(90%);

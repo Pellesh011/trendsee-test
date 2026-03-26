@@ -137,6 +137,26 @@
               </div>
             </div>
           </div>
+          <div class=" mt-10">
+            <div class="tag background-brand-subtle">
+              <span class="body-small brand-medium">Туториал</span>
+            </div>
+            <div class="tag backgroud-warning-subtle">
+              <span class="body-small warning-bold">Энергичное видео</span>
+            </div>
+            <div class="tag backgroud-danger-subtle">
+              <span class="body-small danger-bold">Изи монтаж</span>
+            </div>
+            <div class="tag backgroud-success-subtle">
+              <span class="body-small success-bold">Трендовый звук</span>
+            </div>
+            <div class="tag background-brand-subtle">
+              <span class="body-small brand-medium">Лид магнит</span>
+            </div>
+            <div class="tag backgroud-success-subtle">
+              <span class="body-small success-bold">Красота и здоровье</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -158,6 +178,16 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
 </script>
 
 <style scoped>
+.tag {
+  border: 1px solid transparent;
+  border-radius:20px;
+  padding: 4px 12px;
+  margin-right: 10px;
+  white-space: nowrap;
+  float: left;
+  margin-top: 10px;
+}
+
 .video-language-item{
     width: fit-content;
   padding: 3.2px 8px;
@@ -198,9 +228,9 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
 
 .reel-modal-left {
   flex: 1;
+  min-width: 216px;
   max-width: 216px;
   margin: 10px;
-  min-width: 0;
 }
 
 
@@ -268,19 +298,6 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
 
 
 
-
-
-@media (max-width: 768px) {
-  .reel-modal {
-    flex-direction: column;
-    width: 95vw;
-    height: 95vh;
-  }
-
-  .reel-modal-right {
-    max-width: none;
-  }
-}
 
 
 
