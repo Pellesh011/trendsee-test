@@ -39,7 +39,7 @@
                   <div class="grid">
                     <a href="#" class="text-brand  heading-6 semibold">{{ modalStore.activePost?.username || '' }}</a>
                     <span class="action-small regular text-secondary">{{ modalStore.activePost?.followers || ''
-                    }}</span>
+                      }}</span>
                   </div>
                 </div>
               </div>
@@ -157,6 +157,28 @@
               <span class="body-small success-bold">Красота и здоровье</span>
             </div>
           </div>
+          <div class="panel flex-full-width pt-20">
+            <div>
+              <h5 class="heading-5">Транскрибация</h5>
+            </div>
+            <div class="flex">
+              <div class="background-secondary  translated-item">
+                <div class="horizontal-align ">
+                  <div class="icon  icon-16">
+                    <img src="@/assets/images/icons/translate.svg" alt="views" class="">
+                  </div>
+                  <span class="action-small text-lh-caption regular brand-medium">Tyga – Pop it off</span>
+                </div>
+              </div>
+              <button class="btn-mid background-secondary ml-10">
+                <img src="@/assets/images/icons/copy.svg" >
+              </button>
+            </div>
+          </div>
+          <div>
+            <Expand v-model="transcridtionText" :maxCollapsedHeight="150" :transitionMs="250" expandBtnAlign="right"/>
+
+          </div>
         </div>
       </div>
     </div>
@@ -167,20 +189,50 @@
 <script setup lang="ts">
 import { useModalStore } from '@/stores/modal';
 import type { Post } from '@/types/post';
-
+import {ref} from 'vue';
 const modalStore = useModalStore();
 
 
 import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
+import { VueElement } from 'vue';
 
+
+const transcridtionText = ref(`SPF скатывается? Смотри — вот эти катышки. И нет, это не всегда “плохой SPF”.
+<br>
+<br>
+Скатывается по трём причинам.
+
+Первая — ты намазал под SPF слишком много всего: сыворотка, крем, база… сверху SPF — и оно начинает конфликтовать. Чем больше слоёв, тем выше шанс, что всё свернётся в катышки.
+
+Вторая — ты наносишь толстым слоем и начинаешь тереть. SPF не надо втирать как крем для рук. Его задача — лечь ровной плёнкой. Распределил тонко и не трогаешь.
+
+Третья — ты сразу сверху лепишь макияж или начинаешь трогать лицо. Дай SPF пару минут просто схватиться на коже — и только потом тон, консилер, пудра.
+
+Теперь быстро: как сделать, чтобы не скатывалось.
+Убери один слой под SPF — оставь либо сыворотку, либо крем, не всё вместе.
+Наноси тонким слоем, без “массажа”.
+И не трогай лицо сразу после нанесения.
+
+Кому этот SPF чаще всего не заходит: очень жирная кожа, активные воспаления и если у тебя кожа реагирует на отдушки — будет либо блеск, либо высыпания.
+
+Вердикт: если ты носишь SPF без плотного тона и у тебя не супер-жирная кожа — можно брать. Если у тебя всё скатывается вообще от всего и лицо жирнится за час — ищи матирующий флюид и проще схему ухода.
+
+Напиши в комменты: тип кожи и что ты наносишь под SPF — скажу, почему именно у тебя скатывается и что убрать.
+`)
 
 
 </script>
 
 <style scoped>
+.btn-mid{
+  width: 32px;
+  height: 32px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+}
 .tag {
   border: 1px solid transparent;
-  border-radius:20px;
+  border-radius: 20px;
   padding: 4px 12px;
   margin-right: 10px;
   white-space: nowrap;
@@ -188,16 +240,22 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
   margin-top: 10px;
 }
 
-.video-language-item{
-    width: fit-content;
+.video-language-item {
+  width: fit-content;
   padding: 3.2px 8px;
 
+}
+.translated-item{
+  width: fit-content;
+  padding: 7px 8px;
+  border: 1px solid transparent;
+  border-radius: 12px;
 }
 .music-item {
   width: fit-content;
   padding: 3.2px 8px;
   border: 1px solid transparent;
-  border-radius: 16px;
+  border-radius: 8px;
 }
 
 .modal-content h3 {
@@ -237,7 +295,7 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
 
 .reel-modal-right {
   flex: 1;
-  margin: 10px;
+  margin: 10px 20px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -250,8 +308,8 @@ import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
 
 .modal-close-btn {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.5rem;
+  right: 0.5rem;
   border: none;
   border-radius: 16px;
   width: 40px;

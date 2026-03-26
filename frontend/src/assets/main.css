@@ -70,21 +70,24 @@ button {
   --danger-subtle: #FFECF1;
   --danger-bold: #BF0031;
 }
-.success-bold{
+
+.success-bold {
   color: var(--success-bold)
 }
 
 .backgroud-success-subtle {
   background-color: var(--success-subtle);
 }
-.warning-bold{
+
+.warning-bold {
   color: var(--warning-bold)
 }
 
 .backgroud-warning-subtle {
   background-color: var(--warning-subtle);
 }
-.danger-bold{
+
+.danger-bold {
   color: var(--danger-bold)
 }
 
@@ -92,7 +95,7 @@ button {
   background-color: var(--danger-subtle);
 }
 
-.brand-subtle{
+.brand-subtle {
   color: var(--brand-subtle);
 }
 
@@ -138,7 +141,7 @@ p {
   color: var(--text-primary);
 }
 
-button.primary{
+button.primary {
   color: #f8f9fa;
   width: 100%;
   height: 40px;
@@ -153,8 +156,8 @@ button.primary.background-default {
   background-color: var(--components-button-primary-background-default, #2B31B3);
 }
 
-.brand-medium{
-   color: var(--text-brand-medium, #2B31B3);
+.brand-medium {
+  color: var(--text-brand-medium, #2B31B3);
 }
 
 .text-brand {
@@ -293,12 +296,15 @@ button.primary.background-default {
   max-width: 100%;
   max-height: 100%;
 }
-.mr-10{
+
+.mr-10 {
   margin-right: 10px;
 }
+
 .ml-10 {
   margin-left: 10px;
 }
+
 .ml-5 {
   margin-left: 5px;
 }
@@ -373,6 +379,17 @@ button.primary.background-default {
 
 .follow-btn-large:hover {
   background: #e9ecef;
+}
+
+.heading-5 {
+  margin: 0px;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
+
+.pt-20{
+ padding-top: 20px;
 }
 
 

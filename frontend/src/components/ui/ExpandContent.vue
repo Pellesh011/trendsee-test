@@ -27,7 +27,7 @@ interface Props {
   transitionMs?: number
 }
 
-const props = defineProps<Props & { modelValue: string }>()
+const props = defineProps<Props & { modelValue: string; expandIcon: string; expandBtnAlign: 'right'|'left', classes: string}>()
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
 }>()
@@ -106,5 +106,10 @@ onMounted(() => {
 
 .caption {
   margin: 0;
+}
+
+.right-btn{
+  position: absolute;
+  right: 0px;
 }
 </style>
