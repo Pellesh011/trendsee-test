@@ -54,8 +54,8 @@ button {
   --text-brand-medium: #2B31B3;
   --text-secondary: #4E616B;
   --text-secondary-inverse: #A0ADB4;
-  --components-button-primary-background-default: #2B31B3;
-  --white-100: #FFFFFF;
+  --background-default: #2B31B3;
+  --white: #FFFFFF;
   --text-tertiary: #83939C;
   --text-primary: #000000;
   --backgroud-tertiary: #E6E8EA;
@@ -69,10 +69,11 @@ button {
   --warning-bold: #9E3F00;
   --danger-subtle: #FFECF1;
   --danger-bold: #BF0031;
+  --stroke-focus: #AEB1F2;
 }
 
 .white {
-  color: var(--white-100);
+  color: var(--white);
 }
 
 .background-secondary {
@@ -161,7 +162,7 @@ button.primary {
 
 
 button.background-default {
-  background-color: var(--components-button-primary-background-default, #2B31B3);
+  background-color: var(--background-default, #2B31B3);
 }
 
 .brand-medium {

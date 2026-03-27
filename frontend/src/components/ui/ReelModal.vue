@@ -50,8 +50,8 @@
               </div>
             </div>
             <div class="container video-card-desc-short mt-10">
-              <Expand v-model="modalStore.activePost.desc" :maxCollapsedHeight="16" :transitionMs="250" 
-               background="caption gray-8"/>
+              <Expand v-model="modalStore.activePost.desc" :maxCollapsedHeight="16" :transitionMs="250"
+                background="caption gray-8" />
             </div>
             <div class="mt-10">
               <div class="horizontal-align flex-full-width background-secondary modal-stat-item ">
@@ -177,8 +177,9 @@
             </div>
           </div>
           <div class="mt-10">
-            <Expand v-model="transcridtionText" :maxCollapsedHeight="140" :transitionMs="250" expandBtnAlign="flex-content-right"
-              expandIcon="arrow-down" background="background-secondary pad-20 body-small text-secondary " />
+            <Expand v-model="transcridtionText" :maxCollapsedHeight="140" :transitionMs="250"
+              expandBtnAlign="flex-content-right" expandIcon="arrow-down"
+              background="background-secondary pad-20 body-small text-secondary " />
           </div>
           <button class="btn-big  background-default mt-20">
             <div class="horizontal-align">
@@ -196,11 +197,53 @@
               <h5 class="heading-5">Суть</h5>
             </div>
             <div class="background-secondary pad-20">
-                <p class="body-small text-secondary">
-                  Разбор состава/логики: он в человеческих словах переводит состав/механику (“что реально делает X”), называет 2–3 работающих активных компонента и 2–3 маркетинговых “пустых” обещания.
-                </p>
+              <p class="body-small text-secondary">
+                Разбор состава/логики: он в человеческих словах переводит состав/механику (“что реально делает X”),
+                называет 2–3 работающих активных компонента и 2–3 маркетинговых “пустых” обещания.
+              </p>
 
             </div>
+          </div>
+          <div class="stepper">
+            <ul class=" ">
+              <li>
+                <div class="left-stepper">
+                  <p class="caption text-secondary"> <img src="@/assets/images/icons/timer.svg">0–3 сек</p>
+                </div>
+                <div class="right-stepper ">
+                  <img src="@/assets/images/icons/step-1.svg">
+                  <p class="step-heading heading-5">Шок-сравнение</p>
+                  <p class="step-desc body-small text-secondary">Визуальный (Девушка с предметом) + Текст на экране:
+                    "Это спасет вашу зиму"</p>
+                </div>
+
+              </li>
+              <li>
+                <div class="left-stepper">
+                  <p class="caption text-secondary"> <img src="@/assets/images/icons/timer.svg">3–15 сек</p>
+                </div>
+                <div class="right-stepper">
+                  <img src="@/assets/images/icons/step-2.svg">
+                  <p class="step-heading heading-5">Сюжет</p>
+                  <p class="step-desc body-small text-secondary">[Герой] показывает проблему -> Резкар смена кадра -> Решение</p>
+                </div>
+
+              </li>
+              <li>
+                <div class="left-stepper">
+                  <p class="caption text-secondary"> <img src="@/assets/images/icons/timer.svg">15–120 сек</p>
+                </div>
+                <div class="right-stepper">
+                  <img src="@/assets/images/icons/step-3.svg">
+                  <p class="step-heading heading-5">Сюжет</p>
+                  <p class="step-desc body-small text-secondary last-step-desc">Призыв: "Пиши слово "ССЫЛКА" в комменты" </p>
+                </div>
+
+              </li>
+
+            </ul>
+
+
           </div>
         </div>
       </div>
@@ -382,23 +425,10 @@ const transcridtionText = ref(`SPF скатывается? Смотри — во
   border-radius: 8px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 .video-actions {
   position: absolute;
 
 }
-
-
 
 .video-cart {
 
@@ -410,7 +440,7 @@ const transcridtionText = ref(`SPF скатывается? Смотри — во
   border-radius: 12px;
 
   overflow: hidden;
-  background-color: white;
+  background-color: var(--white);
   position: relative;
 }
 
@@ -430,7 +460,61 @@ const transcridtionText = ref(`SPF скатывается? Смотри — во
   display: block;
 }
 
-.video-card-desc-short {}
+.stepper li {
+  display: flex;
+}
+
+.stepper ul {
+  list-style: none;
+}
+
+.stepper ul li div.right-stepper {
+  display: grid;
+  grid-auto-flow: row;
+  position: relative;
+}
+
+   .stepper ul {
+    padding: 0px;
+   }
+
+.stepper ul li div.right-stepper img {
+  position: absolute;
+  left: -7.5px;
+}
+
+.stepper ul li div.left-stepper {
+  text-align: right;
+}
+.stepper ul li div.left-stepper p{
+  width: 120px;
+  padding-right: 20px;
+}
+
+.stepper ul li div.left-stepper img{
+ 
+  padding-right: 5px;
+}
+
+.stepper .right-stepper p.step-desc {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  border-left: 1px solid var(--stroke-focus);
+}
+
+.stepper .right-stepper p.step-heading {
+  padding-left: 30px;
+  border-left: none !important;
+  margin-bottom: -4px;
+  margin-top: -4px;
+}
+
+
+p.last-step-desc {
+  border: none !important;
+
+}
 
 .blogger-card {
   display: flex;
@@ -451,7 +535,7 @@ const transcridtionText = ref(`SPF скатывается? Смотри — во
   width: 100%;
   height: 100%;
   border-radius: 128px;
-  border: 1px solid var(--white-100, #FFFFFF);
+  border: 1px solid var(--white);
 }
 
 .video-actions .btn {
