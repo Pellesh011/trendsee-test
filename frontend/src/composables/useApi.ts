@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import axios from 'axios';
-import type { Post } from '@/types/post';
+import type { Post, BackendPost, MyPostsResponse } from '@/types/post';
 
 const api = axios.create({
   baseURL: 'http://localhost:8000/api',
@@ -10,25 +10,20 @@ export function useApi() {
   const loading = ref(false);
   const error = ref<string | null>(null);
 
-  const fetchPosts = async (): Promise<Post[] | null> => {
+  const fetchMyPosts = async (skip: number = 0, limit: number = 10): Promise<MyPostsResponse | null> => {
     try {
       loading.value = true;
       error.value = null;
-      // Mock API response for now (backend /posts not implemented)
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      return [
-        {
-          id: 6,
-          image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=1000',
-          stats: ['150k', '120k', '25k', '780'],
-          desc: 'Load more reels demo',
-          username: '@demo',
-          followers: '500K',
-          likes: '150K'
+      const token = localStorage.getItem('access_token') || '';
+      const response = await api.get<MyPostsResponse>('/posts/me', {
+        params: { skip, limit },
+        headers: { 
+          Authorization: `Bearer ${token}`
         }
-      ];
+      });
+      return response.data;
     } catch (err) {
-      error.value = 'Failed to fetch posts';
+      error.value = 'Failed to fetch my posts';
       console.error(err);
       return null;
     } finally {
@@ -36,6 +31,6 @@ export function useApi() {
     }
   };
 
-  return { loading, error, fetchPosts };
+  return { loading, error, fetchMyPosts };
 }
 

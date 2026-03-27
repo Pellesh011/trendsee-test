@@ -11,3 +11,19 @@ export interface Post {
   date?: string;
 }
 
+export interface BackendPost {
+  id: string;
+  user_id: string;
+  title: string;
+  text: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface MyPostsResponse {
+  items: BackendPost[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+

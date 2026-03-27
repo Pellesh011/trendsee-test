@@ -97,23 +97,51 @@ class PostService:
         return False
 
     @staticmethod
-    async def get_user_posts(redis: Redis, conn: asyncpg.Connection, user_id: UUID) -> List[Dict[str, Any]]:
+    async def get_user_posts(
+        redis: Redis, 
+        conn: asyncpg.Connection, 
+        user_id: UUID, 
+        skip: int = 0, 
+        limit: int = 10
+    ) -> Dict[str, Any]:
         key = f"users_posts:{user_id}"
-        post_ids_str = await redis.lrange(key, 0, -1)
-        posts = []
+        
+        # Step 1: Full validation and clean invalid posts
+        all_post_ids_str = await redis.lrange(key, 0, -1)
         invalid_ids = []
+        for post_id_str in all_post_ids_str:
+            cached = await redis.get(post_id_str)
+            if not cached:
+                invalid_ids.append(post_id_str)
+        
+        # Remove all invalids first
+        for inv_id in invalid_ids:
+            await redis.lrem(key, 1, inv_id)
+        
+        # Step 2: Get accurate total after clean
+        total = await redis.llen(key)
+        
+        # Step 3: Paginate on cleaned list
+        end = skip + limit
+        post_ids_str = await redis.lrange(key, skip, end - 1)
+        
+        posts = []
         for post_id_str in post_ids_str:
+            # Should all be valid now, but check
             cached = await redis.get(post_id_str)
             if cached:
                 post_dict = json.loads(cached)
                 posts.append(post_dict)
-            else:
-                invalid_ids.append(post_id_str)
-        if invalid_ids:
-            for inv_id in invalid_ids:
-                await redis.lrem(key, 1, inv_id)
-        # Sort by created_at DESC to match original order
+        
+        # Sort by created_at DESC
         posts.sort(key=lambda p: p['created_at'], reverse=True)
-        return posts
+        
+        return {
+            "items": posts,
+            "total": total,
+            "skip": skip,
+            "limit": limit
+        }
+
 
 post_service = PostService()

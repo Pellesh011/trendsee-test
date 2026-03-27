@@ -8,7 +8,16 @@
         @open-reel="modalStore.openPost($event)"
       />
     </div>
-  
+    <button 
+      v-if="postsStore.hasMore && !postsStore.loading"
+      class="find-more-btn"
+      @click="postsStore.loadMore"
+    >
+      Load More Posts
+    </button>
+    <p v-else-if="!postsStore.hasMore" class="no-more">No more posts</p>
+    <div v-if="postsStore.loading" class="loading">Loading...</div>
+    <div v-if="postsStore.error" class="error">{{ postsStore.error }}</div>
   </div>
 </template>
 
@@ -23,7 +32,7 @@ const postsStore = usePostsStore();
 const modalStore = useModalStore();
 
 onMounted(() => {
-  // Initial load if needed
+  postsStore.refreshPosts();
 });
 </script>
 
@@ -44,6 +53,32 @@ onMounted(() => {
 .find-more-btn {
   display: block;
   margin: 20px auto;
+  padding: 12px 24px;
+  background: linear-gradient(45deg, #ff6b6b, #feca57);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.find-more-btn:hover {
+  transform: scale(1.05);
+}
+
+.no-more, .loading, .error {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.loading {
+  color: #feca57;
+}
+
+.error {
+  color: #ff6b6b;
 }
 </style>
 

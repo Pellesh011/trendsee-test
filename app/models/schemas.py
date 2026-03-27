@@ -38,6 +38,13 @@ class PostOut(BaseModel):
     created_at: datetime
     updated_at: datetime
 
+class Pagination(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    items: List[PostOut] = Field(default_factory=list)
+    total: int
+    skip: int
+    limit: int
+
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
