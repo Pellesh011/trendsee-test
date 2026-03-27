@@ -1,5 +1,6 @@
 <template>
-  <div v-if="modalStore.activePost" class="reel-modal-overlay" @click.self="modalStore.close">
+  <Transition name="modal">
+    <div v-if="modalStore.activePost" class="reel-modal-overlay" @click.self="modalStore.close">
     <div class="reel-modal">
       <div class="reel-modal-left">
         <div class="video-cart">
@@ -348,9 +349,11 @@
         </div>
       </div>
     </div>
-  </div>
+    </div>
+  </Transition>
 
 </template>
+
 
 <script setup lang="ts">
 import { useModalStore } from '@/stores/modal';
@@ -674,4 +677,32 @@ p.last-step-desc {
 .icon-button span.text {
   margin-left: 4px;
 }
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-active .reel-modal,
+.modal-leave-active .reel-modal {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-enter-from .reel-modal,
+.modal-leave-to .reel-modal {
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+}
+
+.modal-enter-to .reel-modal,
+.modal-leave-from .reel-modal {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
 </style>
+
