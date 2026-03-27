@@ -8,9 +8,7 @@
         @open-reel="modalStore.openPost($event)"
       />
     </div>
-    <button class="find-more-btn" @click="postsStore.loadMore" :disabled="postsStore.loading">
-      {{ postsStore.loading ? 'Загрузка...' : 'Найти еще ролики' }}
-    </button>
+  
   </div>
 </template>
 
