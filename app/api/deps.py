@@ -3,7 +3,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from typing import AsyncGenerator
 from uuid import UUID
 from contextlib import asynccontextmanager
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 from core.database import get_session
 from core.auth import verify_token
 from sqlalchemy import select
@@ -21,8 +21,17 @@ async def get_session_dep(request: Request) -> AsyncGenerator[AsyncSession, None
     """SQLAlchemy AsyncSession from engine."""
     if not hasattr(request.app.state, 'sa_engine') or request.app.state.sa_engine is None:
         raise HTTPException(status_code=500, detail="SA Engine not initialized")
-    async with get_session(request) as session:
+    engine = request.app.state.sa_engine
+    async_session_maker = async_sessionmaker(bind=engine, expire_on_commit=False)
+    session = async_session_maker()
+    try:
         yield session
+        await session.commit()
+    except Exception:
+        await session.rollback()
+        raise
+    finally:
+        await session.close()
 
 async def get_redis(request: Request) -> AsyncGenerator:
     """Redis client."""

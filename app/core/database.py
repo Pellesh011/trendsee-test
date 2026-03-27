@@ -28,6 +28,7 @@ async def get_session(request: fastapi.Request) -> AsyncGenerator[AsyncSession, 
         await session.commit()
     except Exception:
         await session.rollback()
+        raise
     finally:
         await session.close()
 

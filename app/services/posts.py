@@ -17,41 +17,25 @@ class PostService:
         user_id: UUID,
         post_data: PostCreate
     ) -> Dict[str, Any]:
-        ins = insert(Post).values(
-            user_id=user_id, 
-            title=post_data.title, 
-            text=post_data.text
-        ).returning(Post.id)
-        post_id = await session.scalar(ins)
-        stmt = select(Post).where(Post.id == post_id)
-        result = await session.execute(stmt)
-        post = result.scalar_one()
-        await session.commit()
-        post_dict = post.__dict__
-        await redis.setex(str(post_id), 600, json.dumps(post_dict))
-        await redis.lpush(f"users_posts:{user_id}", str(post_id))
-        return post_dict
-
-    @staticmethod
-    async def get(
-        redis: Redis,
-        session: AsyncSession,
-        post_id: UUID,
-        user_id: UUID
-    ) -> Dict[str, Any]:
-        post_str_id = str(post_id)
-        cached = await redis.get(post_str_id)
-        if cached:
-            return json.loads(cached)
-        stmt = select(Post).where(and_(Post.id == post_id, Post.user_id == user_id))
-        result = await session.execute(stmt)
-        post = result.scalar_one_or_none()
-        if not post:
-            raise HTTPException(404, "Post not found or unauthorized")
-        post_dict = post.__dict__
-        await redis.setex(post_str_id, 600, json.dumps(post_dict))
-        await asyncio.sleep(2)
-        return post_dict
+        try:
+            ins = insert(Post).values(
+                user_id=user_id, 
+                title=post_data.title, 
+                text=post_data.text
+            ).returning(Post.id)
+            post_id = await session.scalar(ins)
+            stmt = select(Post).where(Post.id == post_id)
+            result = await session.execute(stmt)
+            post = result.scalar_one()
+            await session.commit()
+            post_obj = PostOut.model_validate(post)
+            post_dict = post_obj.model_dump(mode='json')
+            await redis.setex(str(post_id), 600, json.dumps(post_dict))
+            await redis.lpush(f"users_posts:{user_id}", str(post_id))
+            return post_dict
+        except Exception as e:
+            print(e) 
+            return {}
 
     @staticmethod
     async def update(
@@ -76,7 +60,8 @@ class PostService:
         if not post:
             raise HTTPException(404, "Post not found or unauthorized")
         await session.commit()
-        post_dict = post.__dict__
+        post_obj = PostOut.model_validate(post)
+        post_dict = post_obj.model_dump(mode='json')
         await redis.setex(str(post_id), 600, json.dumps(post_dict))
         return post_dict
 
@@ -125,7 +110,9 @@ class PostService:
         for post_id_str in redis_post_ids_str:
             cached = await redis.get(post_id_str)
             if cached:
-                post_dict = json.loads(cached)
+                post_dict_raw = json.loads(cached)
+                post_obj = PostOut.model_validate(post_dict_raw)
+                post_dict = post_obj.model_dump(mode='json')
                 redis_posts.append(post_dict)
                 redis_ids.add(post_id_str)
         
@@ -145,14 +132,12 @@ class PostService:
             rows = result.fetchall()
             
             for row in rows:
-                post_dict = dict(row._mapping)
+                post = row.Post
+                post_obj = PostOut.model_validate(post)
+                post_dict = post_obj.model_dump(mode='json')
                 post_id_str = str(post_dict['id'])
                 if post_id_str not in redis_ids:
-                    # Cache it
-                    await redis.setex(post_id_str, 600, json.dumps(post_dict))
-                    await redis.lpush(key, post_id_str)
                     db_posts.append(post_dict)
-                    redis_ids.add(post_id_str)
         
         # Merge and sort DESC by created_at
         all_posts = redis_posts + db_posts

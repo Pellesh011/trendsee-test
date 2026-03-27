@@ -18,6 +18,7 @@ async def create_post(
 ):
     """Create new publication (cached in Redis 10min)."""
     post = await post_service.create(session, redis, user_id, post_data)
+    print(post)
     return PostOut.model_validate(post)
 
 @router.get("/me", response_model=Pagination)
@@ -31,17 +32,6 @@ async def list_my_posts(
     """Get paginated publications of current user (Redis-optimized). Query params: skip, limit."""
     result = await post_service.get_user_posts(redis, session, user_id, skip, limit)
     return Pagination.model_validate(result)
-
-@router.get("/{post_id}", response_model=PostOut)
-async def get_post(
-    post_id: UUID,
-    user_id: UUID = Depends(get_current_user),
-    redis: Redis = Depends(get_redis),
-    session: AsyncSession = Depends(get_session_dep)
-):
-    """Get publication (Redis first, DB +2s delay fallback). Owner only."""
-    post = await post_service.get(redis, session, post_id, user_id)
-    return PostOut.model_validate(post)
 
 @router.patch("/{post_id}", response_model=PostOut)
 async def update_post(
