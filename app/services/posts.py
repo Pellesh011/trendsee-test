@@ -26,6 +26,7 @@ class PostService:
         )
         post_dict = dict(row)
         await redis.setex(str(post_id), 600, json.dumps(post_dict))
+        await redis.lpush(f"users_posts:{user_id}", str(post_id))
         return post_dict
 
     @staticmethod
@@ -96,11 +97,23 @@ class PostService:
         return False
 
     @staticmethod
-    async def get_user_posts(conn: asyncpg.Connection, user_id: UUID) -> List[Dict[str, Any]]:
-        rows = await conn.fetch(
-            "SELECT * FROM posts WHERE user_id = $1 ORDER BY created_at DESC",
-            user_id
-        )
-        return [dict(row) for row in rows]
+    async def get_user_posts(redis: Redis, conn: asyncpg.Connection, user_id: UUID) -> List[Dict[str, Any]]:
+        key = f"users_posts:{user_id}"
+        post_ids_str = await redis.lrange(key, 0, -1)
+        posts = []
+        invalid_ids = []
+        for post_id_str in post_ids_str:
+            cached = await redis.get(post_id_str)
+            if cached:
+                post_dict = json.loads(cached)
+                posts.append(post_dict)
+            else:
+                invalid_ids.append(post_id_str)
+        if invalid_ids:
+            for inv_id in invalid_ids:
+                await redis.lrem(key, 1, inv_id)
+        # Sort by created_at DESC to match original order
+        posts.sort(key=lambda p: p['created_at'], reverse=True)
+        return posts
 
 post_service = PostService()

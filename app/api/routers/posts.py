@@ -24,11 +24,12 @@ async def create_post(
 @router.get("/me", response_model=List[PostOut])
 async def list_my_posts(
     user_id: UUID = Depends(get_current_user),
+    redis: Redis = Depends(get_redis),
     db: asyncpg.Pool = Depends(get_db)
 ):
-    """Get all publications of current user."""
+    """Get all publications of current user (Redis-optimized: validate list, fetch cached, clean invalid)."""
     async with db.acquire() as conn:
-        posts = await post_service.get_user_posts(conn, user_id)
+        posts = await post_service.get_user_posts(redis, conn, user_id)
     return [PostOut.model_validate(p) for p in posts]
 
 @router.get("/{post_id}", response_model=PostOut)
