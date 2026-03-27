@@ -112,12 +112,20 @@
         </div>
       </div>
       <div class="reel-modal-right">
-        <button class="modal-close-btn background-secondary" @click="modalStore.close">
-          <img src="@/assets/images/icons/close.svg">
-        </button>
-        <div class="modal-content">
-          <p class="text-secondary body-small">Тема видео</p>
+        <div class="flex flex-full-width">
+          <div>
+<p class="text-secondary body-small">Тема видео</p>
           <h3 v-html="modalStore.activePost?.desc || ''" class="text-primary heading-3 semibold"></h3>
+          </div>
+          
+          <button class="modal-close-btn background-secondary " @click="modalStore.close">
+            <img src="@/assets/images/icons/close.svg">
+          </button>
+        </div>
+      
+        <div class="modal-content">
+         
+          
           <div class="flex">
             <div class="background-secondary  music-item">
               <div class="horizontal-align ">
@@ -334,7 +342,7 @@ const transcridtionText = ref(`SPF скатывается? Смотри — во
   border-radius: 8px;
 }
 
-.modal-content h3 {
+h3 {
   margin: 10px 70px 10px 0px;
 }
 
@@ -364,14 +372,14 @@ const transcridtionText = ref(`SPF скатывается? Смотри — во
   flex: 1;
   min-width: 216px;
   max-width: 216px;
-  margin: 10px;
+  margin: 20px 10px 20px 20px;
 }
 
 
 
 .reel-modal-right {
   flex: 1;
-  margin: 10px 20px;
+  margin: 20px 20px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -383,9 +391,7 @@ const transcridtionText = ref(`SPF скатывается? Смотри — во
 }
 
 .modal-close-btn {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+
   border: none;
   border-radius: 16px;
   width: 40px;
