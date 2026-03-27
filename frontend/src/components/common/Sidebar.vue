@@ -264,7 +264,6 @@ img.out[src$="toggle-side-menu.svg"] {
 
   padding: 0px;
   text-decoration: none;
-  color: #333;
   border-radius: 4px;
 }
 

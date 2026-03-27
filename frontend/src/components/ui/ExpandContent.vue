@@ -3,7 +3,7 @@
     <div class="expand-content" :style="contentStyle" ref="contentWrapper" :aria-expanded="isOpen.toString()">
       <slot>
         <!-- fallback content -->
-        <p class=" regular" v-html="modelValue"></p>
+        <p class="" v-html="modelValue"></p>
       </slot>
     </div>
 

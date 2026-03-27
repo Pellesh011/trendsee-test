@@ -53,7 +53,7 @@
             </div>
             <div class="container video-card-desc-short mt-10">
               <Expand v-model="modalStore.activePost.desc" :maxCollapsedHeight="16" :transitionMs="250"
-                background="caption gray-8" />
+                background="caption semibold-500 gray-8" />
             </div>
             <div class="mt-10">
               <div class="horizontal-align flex-full-width background-secondary modal-stat-item ">
@@ -134,7 +134,7 @@
                 <div class="icon  icon-16">
                   <img src="@/assets/images/icons/music.svg" alt="views" class="">
                 </div>
-                <span class="action-small text-lh-caption regular ">Tyga – Pop it off</span>
+                <span class="action-small text-lh-caption semibold ml-5 gray-8">Tyga – Pop it off</span>
               </div>
             </div>
 
@@ -150,22 +150,22 @@
           </div>
           <div class=" mt-10">
             <div class="tag background-brand-subtle">
-              <span class="body-small brand-medium">Туториал</span>
+              <span class="body-small brand-medium semibold-500">Туториал</span>
             </div>
             <div class="tag backgroud-warning-subtle">
-              <span class="body-small warning-bold">Энергичное видео</span>
+              <span class="body-small warning-bold semibold-500">Энергичное видео</span>
             </div>
             <div class="tag backgroud-danger-subtle">
-              <span class="body-small danger-bold">Изи монтаж</span>
+              <span class="body-small danger-bold semibold-500">Изи монтаж</span>
             </div>
             <div class="tag backgroud-success-subtle">
-              <span class="body-small success-bold">Трендовый звук</span>
+              <span class="body-small success-bold semibold-500">Трендовый звук</span>
             </div>
             <div class="tag background-brand-subtle">
-              <span class="body-small brand-medium">Лид магнит</span>
+              <span class="body-small brand-medium semibold-500">Лид магнит</span>
             </div>
             <div class="tag backgroud-success-subtle">
-              <span class="body-small success-bold">Красота и здоровье</span>
+              <span class="body-small success-bold semibold-500">Красота и здоровье</span>
             </div>
           </div>
           <div class="panel flex-full-width pt-20">
@@ -178,7 +178,7 @@
                   <div class="icon  icon-16">
                     <img src="@/assets/images/icons/translate.svg" alt="views" class="">
                   </div>
-                  <span class="action-small text-lh-caption regular brand-medium">Tyga – Pop it off</span>
+                  <span class="action-small text-lh-caption semibold brand-medium">Переведено</span>
                 </div>
               </div>
               <button class="btn-mid background-secondary ml-10">
@@ -187,11 +187,11 @@
             </div>
           </div>
           <div class="mt-10">
-            <Expand v-model="transcridtionText" :maxCollapsedHeight="140" :transitionMs="250"
+            <Expand v-model="transcridtionText" :maxCollapsedHeight="160" :transitionMs="250"
               expandBtnAlign="flex-content-right" expandIcon="arrow-down"
-              background="background-secondary pad-20 body-small text-secondary " />
+              background="background-secondary pad-20 body-small text-secondary text-lh-big" />
           </div>
-          <button class="btn-big  background-default mt-20">
+          <button class="btn-big  background-default mt-30">
             <div class="horizontal-align">
               <div class="icon icon-16 ml-10">
                 <img src="@/assets/images/icons/magic.svg" alt="" class="">
@@ -410,7 +410,7 @@ const transcridtionText = ref(`SPF скатывается? Смотри — во
 .tag {
   border: 1px solid transparent;
   border-radius: 20px;
-  padding: 4px 12px;
+  padding: 2px 12px 6px;
   margin-right: 10px;
   white-space: nowrap;
   float: left;
