@@ -1,43 +1,48 @@
 from uuid import UUID
 from typing import Dict, Any
 from fastapi import HTTPException
-import asyncpg
-from ..models.schemas import UserCreate, UserUpdate, UserOut
-from ..core.auth import create_token
+from sqlalchemy import select, insert, update, delete
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
+from models.models import User
+from models.schemas import UserCreate, UserOut
+from core.auth import create_token
 
 class UserService:
     @staticmethod
-    async def create(conn: asyncpg.Connection, user_data: UserCreate) -> Dict[str, Any]:
-        user_id = await conn.fetchval(
-            "INSERT INTO users (name) VALUES ($1) RETURNING id",
-            user_data.name
-        )
-        row = await conn.fetchrow("SELECT id, name, created_at, updated_at FROM users WHERE id = $1", user_id)
-        return dict(row)
+    async def create(session: AsyncSession, user_data: UserCreate) -> Dict[str, Any]:
+        ins = insert(User).values(name=user_data.name).returning(User.id)
+        user_id = await session.scalar(ins)
+        stmt = select(User).where(User.id == user_id)
+        result = await session.execute(stmt)
+        user = result.scalar_one()
+        await session.commit()
+        return user.__dict__
 
     @staticmethod
-    async def get(conn: asyncpg.Connection, user_id: UUID) -> Dict[str, Any]:
-        row = await conn.fetchrow(
-            "SELECT id, name, created_at, updated_at FROM users WHERE id = $1",
-            user_id
-        )
-        if not row:
+    async def get(session: AsyncSession, user_id: UUID) -> Dict[str, Any]:
+        stmt = select(User).where(User.id == user_id)
+        result = await session.execute(stmt)
+        user = result.scalar_one_or_none()
+        if not user:
             raise HTTPException(404, "User not found")
-        return dict(row)
+        return user.__dict__
 
     @staticmethod
-    async def update_name(conn: asyncpg.Connection, user_id: UUID, name: str) -> Dict[str, Any]:
-        row = await conn.fetchrow(
-            "UPDATE users SET name = $1 WHERE id = $2 RETURNING id, name, created_at, updated_at",
-            name, user_id
-        )
-        if not row:
+    async def update_name(session: AsyncSession, user_id: UUID, name: str) -> Dict[str, Any]:
+        stmt = update(User).where(User.id == user_id).values(name=name).returning(User)
+        result = await session.execute(stmt)
+        user = result.scalar_one_or_none()
+        if not user:
             raise HTTPException(404, "User not found")
-        return dict(row)
+        await session.commit()
+        return user.__dict__
 
     @staticmethod
-    async def delete(conn: asyncpg.Connection, user_id: UUID) -> bool:
-        result = await conn.execute("DELETE FROM users WHERE id = $1", user_id)
-        return result == "DELETE 1"
+    async def delete(session: AsyncSession, user_id: UUID) -> bool:
+        stmt = delete(User).where(User.id == user_id)
+        result = await session.execute(stmt)
+        await session.commit()
+        return result.rowcount == 1
 
 user_service = UserService()

@@ -3,32 +3,31 @@ from typing import Dict, Any, List, Optional
 from fastapi import HTTPException
 import asyncio
 import json
-import asyncpg
-from sqlalchemy import select, desc, text
-from ..models.models import Post
+from sqlalchemy import select, insert, update, delete, and_, desc, text
+from sqlalchemy.ext.asyncio import AsyncSession
+from models.models import Post
 from redis.asyncio import Redis
-from ..models.schemas import PostCreate, PostUpdate, PostOut
-from ..services.users import user_service  # Not direct, but for ownership check
-from sqlalchemy import select, desc, text
-from ..models.models import Post
+from models.schemas import PostCreate, PostUpdate, PostOut
 
 class PostService:
     @staticmethod
     async def create(
-        conn: asyncpg.Connection,
+        session: AsyncSession,
         redis: Redis,
         user_id: UUID,
         post_data: PostCreate
     ) -> Dict[str, Any]:
-        post_id = await conn.fetchval(
-            "INSERT INTO posts (user_id, title, text) VALUES ($1, $2, $3) RETURNING id",
-            user_id, post_data.title, post_data.text
-        )
-        row = await conn.fetchrow(
-            "SELECT * FROM posts WHERE id = $1",
-            post_id
-        )
-        post_dict = dict(row)
+        ins = insert(Post).values(
+            user_id=user_id, 
+            title=post_data.title, 
+            text=post_data.text
+        ).returning(Post.id)
+        post_id = await session.scalar(ins)
+        stmt = select(Post).where(Post.id == post_id)
+        result = await session.execute(stmt)
+        post = result.scalar_one()
+        await session.commit()
+        post_dict = post.__dict__
         await redis.setex(str(post_id), 600, json.dumps(post_dict))
         await redis.lpush(f"users_posts:{user_id}", str(post_id))
         return post_dict
@@ -36,7 +35,7 @@ class PostService:
     @staticmethod
     async def get(
         redis: Redis,
-        conn: asyncpg.Connection,
+        session: AsyncSession,
         post_id: UUID,
         user_id: UUID
     ) -> Dict[str, Any]:
@@ -44,58 +43,54 @@ class PostService:
         cached = await redis.get(post_str_id)
         if cached:
             return json.loads(cached)
-        row = await conn.fetchrow("SELECT * FROM posts WHERE id = $1 AND user_id = $2", post_id, user_id)
-        if not row:
+        stmt = select(Post).where(and_(Post.id == post_id, Post.user_id == user_id))
+        result = await session.execute(stmt)
+        post = result.scalar_one_or_none()
+        if not post:
             raise HTTPException(404, "Post not found or unauthorized")
-        post_dict = dict(row)
+        post_dict = post.__dict__
         await redis.setex(post_str_id, 600, json.dumps(post_dict))
         await asyncio.sleep(2)
         return post_dict
 
     @staticmethod
     async def update(
-        conn: asyncpg.Connection,
+        session: AsyncSession,
         redis: Redis,
         post_id: UUID,
         user_id: UUID,
-        title: Optional[str],
-        text: Optional[str]
+        title: Optional[str] = None,
+        text: Optional[str] = None
     ) -> Dict[str, Any]:
-        if not title and not text:
+        if title is None and text is None:
             raise HTTPException(400, "At least one field required")
-        updates = []
-        params = []
-        i = 1
-        if title:
-            updates.append(f"title = ${i}")
-            params.append(title)
-            i += 1
-        if text:
-            updates.append(f"text = ${i}")
-            params.append(text)
-            i += 1
-        params.append(post_id)
-        params.append(user_id)
-        query = f"UPDATE posts SET {', '.join(updates)}, updated_at = CURRENT_TIMESTAMP WHERE id = ${i} AND user_id = ${i+1} RETURNING *"
-        row = await conn.fetchrow(query, *params)
-        if not row:
+        values = {}
+        if title is not None:
+            values['title'] = title
+        if text is not None:
+            values['text'] = text
+        values['updated_at'] = text('CURRENT_TIMESTAMP')
+        stmt = update(Post).where(and_(Post.id == post_id, Post.user_id == user_id)).values(**values).returning(Post)
+        result = await session.execute(stmt)
+        post = result.scalar_one_or_none()
+        if not post:
             raise HTTPException(404, "Post not found or unauthorized")
-        post_dict = dict(row)
+        await session.commit()
+        post_dict = post.__dict__
         await redis.setex(str(post_id), 600, json.dumps(post_dict))
         return post_dict
 
     @staticmethod
     async def delete(
-        conn: asyncpg.Connection,
+        session: AsyncSession,
         redis: Redis,
         post_id: UUID,
         user_id: UUID
     ) -> bool:
-        result = await conn.execute(
-            "DELETE FROM posts WHERE id = $1 AND user_id = $2",
-            post_id, user_id
-        )
-        if result == "DELETE 1":
+        stmt = delete(Post).where(and_(Post.id == post_id, Post.user_id == user_id))
+        result = await session.execute(stmt)
+        await session.commit()
+        if result.rowcount == 1:
             await redis.delete(str(post_id))
             return True
         return False
@@ -103,7 +98,7 @@ class PostService:
     @staticmethod
     async def get_user_posts(
         redis: Redis, 
-        conn: asyncpg.Connection, 
+        session: AsyncSession, 
         user_id: UUID, 
         skip: int = 0, 
         limit: int = 10
@@ -141,10 +136,12 @@ class PostService:
         if gap > 0:
             # Fetch old posts from DB to fill gap (newest first among old)
             stmt = select(Post).where(
-                Post.user_id == user_id,
-                Post.created_at < text("NOW() - INTERVAL '10 minutes'")
+                and_(
+                    Post.user_id == user_id,
+                    Post.created_at < text("NOW() - INTERVAL '10 minutes'")
+                )
             ).order_by(desc(Post.created_at)).limit(gap)
-            result = await conn.execute(stmt)
+            result = await session.execute(stmt)
             rows = result.fetchall()
             
             for row in rows:
@@ -153,10 +150,9 @@ class PostService:
                 if post_id_str not in redis_ids:
                     # Cache it
                     await redis.setex(post_id_str, 600, json.dumps(post_dict))
-                    # Add to list if needed (LPUSH to Redis list?)
                     await redis.lpush(key, post_id_str)
                     db_posts.append(post_dict)
-                    redis_ids.add(post_id_str)  # Update to avoid dup
+                    redis_ids.add(post_id_str)
         
         # Merge and sort DESC by created_at
         all_posts = redis_posts + db_posts
@@ -167,10 +163,9 @@ class PostService:
         
         return {
             "items": items,
-            "total": total + len(db_posts),  # Approximate total including newly added
+            "total": total + len(db_posts),
             "skip": skip,
             "limit": limit
         }
-
 
 post_service = PostService()

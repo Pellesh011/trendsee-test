@@ -1,5 +1,5 @@
 from redis.asyncio import Redis
-from ..core.config import settings
+from core.config import settings
 from typing import AsyncGenerator
 
 async def init_redis_client() -> Redis:

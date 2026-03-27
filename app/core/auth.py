@@ -4,7 +4,7 @@ from fastapi import HTTPException
 from uuid import UUID
 from datetime import datetime, timedelta, UTC
 from fastapi import status
-from ..core.config import settings
+from core.config import settings
 
 ALGORITHM = "HS256"
 

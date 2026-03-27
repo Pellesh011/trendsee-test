@@ -1,18 +1,20 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-from .core.database import init_db_pool, close_db_pool
-from .core.cache import init_redis_client, close_redis_client
-from .api.routers import users, posts
+from core.database import init_db_pool, close_db_pool, init_sa_engine, close_sa_engine
+from core.cache import init_redis_client, close_redis_client
+from api.routers import users, posts
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
     app.state.db_pool = await init_db_pool()
+    app.state.sa_engine = await init_sa_engine()
     app.state.redis_client = await init_redis_client()
     yield
     # Shutdown
     await close_db_pool(app.state.db_pool)
+    await close_sa_engine(app.state.sa_engine)
     await close_redis_client(app.state.redis_client)
 
 app = FastAPI(
