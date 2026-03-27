@@ -23,6 +23,7 @@
               </div>
             </div>
             <img :src="modalStore.activePost?.image || ''" alt="Post Image" class="post-image">
+            <img src="@/assets/images/icons/video-play.svg" alt="open" class="video-play">
             <div class="container  flex flex-full-width mt-5">
               <p class="text-secondary-inverse caption text-lh-caption regular">{{ modalStore.activePost?.date || new
                 Date().toLocaleDateString() }}</p>
@@ -114,18 +115,18 @@
       <div class="reel-modal-right">
         <div class="flex flex-full-width">
           <div>
-<p class="text-secondary body-small">Тема видео</p>
-          <h3 v-html="modalStore.activePost?.desc || ''" class="text-primary heading-3 semibold"></h3>
+            <p class="text-secondary body-small">Тема видео</p>
+            <h3 v-html="modalStore.activePost?.desc || ''" class="text-primary heading-3 semibold"></h3>
           </div>
-          
+
           <button class="modal-close-btn background-secondary " @click="modalStore.close">
             <img src="@/assets/images/icons/close.svg">
           </button>
         </div>
-      
+
         <div class="modal-content">
-         
-          
+
+
           <div class="flex">
             <div class="background-secondary  music-item">
               <div class="horizontal-align ">
@@ -204,15 +205,15 @@
             <div>
               <h5 class="heading-5">Суть</h5>
             </div>
-            <div class="background-secondary pad-20">
-              <p class="body-small text-secondary">
+            <div class="background-secondary pad-20 mt-10">
+              <p class="body-small text-secondary ">
                 Разбор состава/логики: он в человеческих словах переводит состав/механику (“что реально делает X”),
                 называет 2–3 работающих активных компонента и 2–3 маркетинговых “пустых” обещания.
               </p>
 
             </div>
           </div>
-          <div class="stepper">
+          <div class="stepper pt-20">
             <ul class=" ">
               <li>
                 <div class="left-stepper">
@@ -224,7 +225,6 @@
                   <p class="step-desc body-small text-secondary">Визуальный (Девушка с предметом) + Текст на экране:
                     "Это спасет вашу зиму"</p>
                 </div>
-
               </li>
               <li>
                 <div class="left-stepper">
@@ -233,7 +233,8 @@
                 <div class="right-stepper">
                   <img src="@/assets/images/icons/step-2.svg">
                   <p class="step-heading heading-5">Сюжет</p>
-                  <p class="step-desc body-small text-secondary">[Герой] показывает проблему -> Резкар смена кадра -> Решение</p>
+                  <p class="step-desc body-small text-secondary">[Герой] показывает проблему -> Резкар смена кадра ->
+                    Решение</p>
                 </div>
 
               </li>
@@ -244,14 +245,105 @@
                 <div class="right-stepper">
                   <img src="@/assets/images/icons/step-3.svg">
                   <p class="step-heading heading-5">Сюжет</p>
-                  <p class="step-desc body-small text-secondary last-step-desc">Призыв: "Пиши слово "ССЫЛКА" в комменты" </p>
+                  <p class="step-desc body-small text-secondary last-step-desc">Призыв: "Пиши слово "ССЫЛКА" в комменты"
+                  </p>
                 </div>
-
               </li>
-
             </ul>
-
-
+          </div>
+          <div class="pad-20 background-secondary">
+            <div class="flex-full-width panel">
+              <div>
+                <h5 class="heading-5">Хук фраза</h5>
+                <p class="body-small text-secondary mt-10">Одна из них — пустышка. Угадаешь какая?</p>
+              </div>
+              <div class="flex">
+                <button class="btn-mid background-secondary ml-10">
+                  <img src="@/assets/images/icons/copy.svg">
+                </button>
+              </div>
+            </div>
+            <div class="flex-full-width panel  mt-10">
+              <div>
+                <h5 class="heading-5">Визуальный хук</h5>
+                <p class="body-small text-secondary mt-10">Одна из них — пустышка. Угадаешь какая?</p>
+              </div>
+              <div class="flex">
+                <button class="btn-mid background-secondary ml-10">
+                  <img src="@/assets/images/icons/copy.svg">
+                </button>
+              </div>
+            </div>
+            <div class="flex-full-width panel mt-10">
+              <div>
+                <h5 class="heading-5">Текстовый хук</h5>
+                <p class="body-small text-secondary mt-10">Одна из них — пустышка. Угадаешь какая?</p>
+              </div>
+              <div class="flex">
+                <button class="btn-mid background-secondary ml-10">
+                  <img src="@/assets/images/icons/copy.svg">
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="panel flex-full-width pt-20">
+            <div>
+              <h5 class="heading-5">Рабочие приёмы</h5>
+            </div>
+            <div class="flex">
+              <button class="btn-mid background-secondary ml-10">
+                <img src="@/assets/images/icons/copy.svg">
+              </button>
+            </div>
+          </div>
+          <div class="pad-20 background-secondary mt-10">
+              <div>
+                <h5 class="heading-5">2. Суть видео</h5>
+                <p class="body-small text-secondary mt-10">Приём: “кому подходит / кому нет” двумя блоками. <br><br>
+Почему сработало: это формат “диагноз → лечение → решение”. Люди сохраняют не эмоции, а инструкцию. И это “обзор”, а не философия</p>
+              </div>
+              <div class=" mt-10">
+                <h5 class="heading-5">3. Монтаж</h5>
+                <p class="body-small text-secondary mt-10">Приём: смена планов каждые 1–2 секунды: лицо → продукт крупно → рука (демо) → снова лицо. <br><br>
+Почему сработало: вертикалки смотрят на автопилоте. Частая смена планов держит внимание даже без звука <br><br>
+Приём: все доказательства — через B-roll вставки на 0.3–0.8 сек (катышки, блеск, этикетка, нанесение. <br><br>
+Почему сработало: речь в кадре быстро утомляет. B-roll делает ощущение “я реально тестировал”.</p>
+              </div>
+              <div class=" mt-10">
+                <h5 class="heading-5">4. Реплики</h5>
+                <p class="body-small text-secondary mt-10">Приём: “триггер доверия” одной фразой: “Я не продаю этот SPF, мне пох, скажу как есть.”<br><br>
+Почему сработало: снимает защиту “мне впаривают”.<br><br>
+Приём: “вилка выбора” в середине: “Если кожа жирная — делай так. Если сухая — так.”<br><br>
+Почему сработало: персонализация без долгого объяснения = удержание.</p>
+              </div>
+          </div>
+          <div class="panel flex-full-width pt-20">
+            <div>
+              <h5 class="heading-5">Воронка / Маркетинг</h5>
+            </div>
+            <div class="flex">
+              <button class="btn-mid background-secondary ml-10">
+                <img src="@/assets/images/icons/copy.svg">
+              </button>
+            </div>
+          </div>
+          <div class="pad-20 background-secondary mt-10">
+              <div>
+                <h5 class="heading-5">CTA голос/визуал</h5>
+                <p class="body-small text-secondary mt-10">Почему сработало: зритель узнаёт свой баг мгновенно. Это не “мнение”, а физический факт в кадре, мозг цепляется.</p>
+              </div>
+              <div class=" mt-10">
+                <h5 class="heading-5">Тригер</h5>
+                <p class="body-small text-secondary mt-10">Почему сработало: зритель узнаёт свой баг мгновенно. Это не “мнение”, а физический факт в кадре, мозг цепляется.</p>
+              </div>
+              <div class=" mt-10">
+                <h5 class="heading-5">Куда ведет</h5>
+                <p class="body-small text-secondary mt-10">Почему сработало: зритель узнаёт свой баг мгновенно. Это не “мнение”, а физический факт в кадре, мозг цепляется.</p>
+              </div>
+              <div class=" mt-10">
+                <h5 class="heading-5">Лид-магнит</h5>
+                <p class="body-small text-secondary mt-10">Почему сработало: зритель узнаёт свой баг мгновенно. Это не “мнение”, а физический факт в кадре, мозг цепляется.</p>
+              </div>
           </div>
         </div>
       </div>
@@ -375,7 +467,11 @@ h3 {
   margin: 20px 10px 20px 20px;
 }
 
-
+.video-play{
+  position: absolute;
+    top: 145px;
+    left: calc(50% - 30px);
+}
 
 .reel-modal-right {
   flex: 1;
@@ -480,9 +576,9 @@ h3 {
   position: relative;
 }
 
-   .stepper ul {
-    padding: 0px;
-   }
+.stepper ul {
+  padding: 0px;
+}
 
 .stepper ul li div.right-stepper img {
   position: absolute;
@@ -492,13 +588,14 @@ h3 {
 .stepper ul li div.left-stepper {
   text-align: right;
 }
-.stepper ul li div.left-stepper p{
+
+.stepper ul li div.left-stepper p {
   width: 120px;
   padding-right: 20px;
 }
 
-.stepper ul li div.left-stepper img{
- 
+.stepper ul li div.left-stepper img {
+
   padding-right: 5px;
 }
 
