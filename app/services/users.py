@@ -29,6 +29,15 @@ class UserService:
         return user.__dict__
 
     @staticmethod
+    async def get_by_name(session: AsyncSession, name: str) -> Dict[str, Any]:
+        stmt = select(User).where(User.name == name)
+        result = await session.execute(stmt)
+        user = result.scalar_one_or_none()
+        if not user:
+            raise HTTPException(404, "User not found")
+        return user.__dict__
+
+    @staticmethod
     async def update_name(session: AsyncSession, user_id: UUID, name: str) -> Dict[str, Any]:
         stmt = update(User).where(User.id == user_id).values(name=name).returning(User)
         result = await session.execute(stmt)

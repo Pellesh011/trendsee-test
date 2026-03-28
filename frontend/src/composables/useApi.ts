@@ -3,7 +3,7 @@ import axios from 'axios';
 import type { Post, BackendPost, MyPostsResponse } from '@/types/post';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: 'http://localhost:8000/api/v1',
 });
 
 export function useApi() {
@@ -31,6 +31,26 @@ export function useApi() {
     }
   };
 
-  return { loading, error, fetchMyPosts };
+  
+  const login = async (name: string): Promise<{ access_token: string } | null> => {
+    try {
+      loading.value = true;
+      error.value = null;
+      const response = await api.post('/users/login', { name });
+      const { access_token } = response.data;
+      localStorage.setItem('access_token', access_token);
+      return response.data;
+    } catch (err: any) {
+      error.value = err.response?.data?.detail || 'Login failed';
+      console.error(err);
+      return null;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return { loading, error, fetchMyPosts, login };
 }
+
+
 

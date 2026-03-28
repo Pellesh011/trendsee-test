@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from uuid import UUID
-from models.schemas import UserCreate, UserOut, UserUpdate, Token
+from models.schemas import UserCreate, UserLogin, UserOut, UserUpdate, Token
 from api.deps import get_session_dep, get_current_user
 from services.users import user_service
 from core.auth import create_token
@@ -31,6 +31,14 @@ async def update_my_name(
     """Update current user's name."""
     user = await user_service.update_name(session, user_id, update_data.name)
     return UserOut.model_validate(user)
+
+@router.post("/login", response_model=Token)
+async def login_user(user_data: UserLogin, session: AsyncSession = Depends(get_session_dep)):
+    """Login by username (name) and return JWT token if exists."""
+    user = await user_service.get_by_name(session, user_data.name)
+    token = create_token(user["id"])
+    return Token(access_token=token)
+
 
 @router.delete("/me", status_code=204)
 async def delete_my_account(

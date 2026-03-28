@@ -274,9 +274,4 @@ const handleClick = () => {
     height: 20px;
 }
 
-@media (max-width: 768px) {
-    .panel {
-        flex-direction: column;
-    }
-}
 </style>
