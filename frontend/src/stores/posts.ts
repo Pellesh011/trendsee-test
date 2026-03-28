@@ -36,12 +36,12 @@ export const usePostsStore = defineStore('posts', () => {
 
   const loadMyPosts = async () => {
     const response = await fetchMyPosts(currentSkip, limit);
-    if (response && response.items.length > 0) {
+    if (response) {
       const newPosts = response.items.map(backendPostToPost);
       posts.value.push(...newPosts);
       currentSkip += limit;
       total.value = response.total;
-      hasMore.value = currentSkip < total.value;
+      hasMore.value = response.items.length === limit;
     } else {
       hasMore.value = false;
     }
