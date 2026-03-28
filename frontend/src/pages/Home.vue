@@ -1,4 +1,5 @@
 <template>
+<Sidebar />
 <div class="content" ref="contentRef">
     <div class="reels-grid">
       <ReelItem
@@ -9,7 +10,9 @@
       />
     </div>
 
-    <div v-if="postsStore.loading" class="loading">Loading...</div>
+    <div v-if="postsStore.loading" class="loading">
+      <Spinner></Spinner>
+    </div>
     <div v-if="postsStore.error" class="error">{{ postsStore.error }}</div>
   </div>
 </template>
@@ -19,7 +22,8 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import { usePostsStore } from '@/stores/posts';
 import { useModalStore } from '@/stores/modal';
 import ReelItem from '@/components/ui/ReelItem.vue';
-import type { Post } from '@/types/post';
+import Spinner from '@/components/ui/Spinner.vue';
+import Sidebar from '@/components/common/Sidebar.vue';
 
 const postsStore = usePostsStore();
 const modalStore = useModalStore();

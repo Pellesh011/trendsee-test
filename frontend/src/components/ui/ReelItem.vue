@@ -75,7 +75,7 @@
                 <div class="blogger-body">
                     <div class="grid">
                         <a href="#" class="text-brand  heading-6 semibold">{{ post.username }}</a>
-                        <span class="action-small regular text-secondary">{{ post.followers }}</span>
+                        <span class="action-small semibold-500 text-secondary">{{ post.followers }}</span>
                     </div>
 
                 </div>

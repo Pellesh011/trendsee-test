@@ -20,7 +20,7 @@ function backendPostToPost(bp: BackendPost): Post {
     stats: [views, likesStr, commentsStr, shares.toString()],
     desc: `${bp.title.slice(0,50)}... ${bp.text.slice(0,100)}`,
     username: '@myaccount',
-    followers: 'Your account',
+    followers: '213.2K',
     likes: likesStr,
     date
   };

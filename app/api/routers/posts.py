@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, status, Query
+from asyncio import sleep
+
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from uuid import UUID
 from typing import List
 from models.schemas import PostCreate, PostOut, PostUpdate, Pagination
@@ -30,6 +32,7 @@ async def list_my_posts(
     session: AsyncSession = Depends(get_session_dep)
 ):
     """Get paginated publications of current user (Redis-optimized). Query params: skip, limit."""
+    await sleep(2)
     result = await post_service.get_user_posts(redis, session, user_id, skip, limit)
     return Pagination.model_validate(result)
 

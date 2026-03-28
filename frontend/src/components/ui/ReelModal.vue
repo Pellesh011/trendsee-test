@@ -40,7 +40,7 @@
                 <div class="blogger-body">
                   <div class="grid">
                     <a href="#" class="text-brand  heading-6 semibold">{{ modalStore.activePost?.username || '' }}</a>
-                    <span class="action-small regular text-secondary">{{ modalStore.activePost?.followers || ''
+                    <span class="action-small semibold-500 text-secondary">{{ modalStore.activePost?.followers || ''
                     }}</span>
                   </div>
                 </div>

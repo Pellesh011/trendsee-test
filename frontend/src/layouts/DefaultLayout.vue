@@ -1,13 +1,12 @@
 <template>
   <div class="layout-container container">
-    <Sidebar />
     <router-view />
   </div>
 </template>
 
 <script setup lang="ts">
 // Layout composes sidebar + content
-import Sidebar from '@/components/common/Sidebar.vue';
+
 </script>
 
 <style scoped>
