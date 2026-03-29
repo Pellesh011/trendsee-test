@@ -9,7 +9,7 @@
 </template>
 <script setup lang="ts">
 
-import Icon from './Icon.vue'
+import Icon from '../common/Icon.vue'
 
 interface Badge { text: string; class: string }
 interface Props { iconSrc: string; label: string; href: string; badge?: Badge }

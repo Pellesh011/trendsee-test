@@ -365,7 +365,7 @@ import { ref } from 'vue';
 const modalStore = useModalStore();
 
 
-import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
+import Expand from '@/components/common/ExpandContent.vue' // путь к файлу
 
 
 const transcridtionText = ref(`SPF скатывается? Смотри — вот эти катышки. И нет, это не всегда “плохой SPF”.

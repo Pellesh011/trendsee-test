@@ -3,7 +3,7 @@ from typing import Dict, Any, List, Optional
 from fastapi import HTTPException
 import asyncio
 import json
-from sqlalchemy import select, insert, update, delete, and_, desc, text
+from sqlalchemy import select, insert, update, delete, and_, desc, text, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from models.models import Post
 from redis.asyncio import Redis
@@ -53,7 +53,6 @@ class PostService:
             values['title'] = title
         if text is not None:
             values['text'] = text
-        values['updated_at'] = text('CURRENT_TIMESTAMP')
         stmt = update(Post).where(and_(Post.id == post_id, Post.user_id == user_id)).values(**values).returning(Post)
         result = await session.execute(stmt)
         post = result.scalar_one_or_none()
@@ -125,7 +124,7 @@ class PostService:
             stmt = select(Post).where(
                 and_(
                     Post.user_id == user_id,
-                    Post.created_at < text("NOW() - INTERVAL '10 minutes'")
+                    Post.created_at < (func.now() - text("INTERVAL '10 minutes'"))
                 )
             ).order_by(desc(Post.created_at)).limit(gap)
             result = await session.execute(stmt)

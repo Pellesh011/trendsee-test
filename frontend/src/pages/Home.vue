@@ -22,8 +22,8 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import { usePostsStore } from '@/stores/posts';
 import { useModalStore } from '@/stores/modal';
 import ReelItem from '@/components/ui/ReelItem.vue';
-import Spinner from '@/components/ui/Spinner.vue';
-import Sidebar from '@/components/common/Sidebar.vue';
+import Spinner from '@/components/common/Spinner.vue';
+import Sidebar from '@/components/ui/Sidebar.vue';
 
 const postsStore = usePostsStore();
 const modalStore = useModalStore();

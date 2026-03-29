@@ -90,7 +90,7 @@
 
 
 <script setup lang="ts">
-import NavMenuItem from '@/components/ui/NavMenuItem.vue'
+import NavMenuItem from '@/components/common/NavMenuItem.vue'
 
 </script>
 <style scoped>
