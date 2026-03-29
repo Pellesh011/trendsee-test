@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="container video-card-desc-short">
-            <p v-html="post.desc" class="text-secondary caption text-lh-caption regular"></p>
+            <p v-html="post.desc" class="text-secondary caption text-lh-caption semibold-500"></p>
         </div>
         <div class="container bottom-btn  grid">
             <p class="text-secondary-inverse caption text-lh-caption regular">{{ post.date || new Date().toLocaleDateString() }}</p>

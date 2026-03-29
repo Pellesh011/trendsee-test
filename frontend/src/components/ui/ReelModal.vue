@@ -493,7 +493,7 @@ h3 {
 
   border: none;
   border-radius: 16px;
-  width: 40px;
+  width: 50px;
   height: 40px;
   display: flex;
   align-items: center;

@@ -10,103 +10,29 @@
     <nav>
       <ul class="side-menu">
         <li class="sub-menu"><a class="heading-6">Поиск контента</a></li>
-        <li class="sub-menu-item">
-          <a href="/" class="horizontal-align">
-            <span class="icon  icon-16">
-              <img src="@/assets/images/icons/home.svg" alt="Icon">
-            </span>
-            <span class="text-secondary menu-text body-medium">Главная</span>
-
-          </a>
-        </li>
-        <li class="sub-menu-item">
-          <a href="/" class="horizontal-align">
-            <span class="icon  icon-16">
-              <img src="@/assets/images/icons/video.svg" alt="Icon">
-            </span>
-            <span class="text-secondary  menu-text body-medium">Видео</span>
-
-          </a>
-        </li>
-        <li class="sub-menu-item">
-          <a href="/" class="horizontal-align">
-            <span class="icon  icon-16">
-              <img src="@/assets/images/icons/search.svg" alt="Icon">
-            </span>
-            <span class="text-secondary menu-text  body-medium">Шпионаж</span>
-
-          </a>
-        </li>
-        <li class="sub-menu-item">
-          <a href="/" class="horizontal-align">
-            <span class="icon  icon-16">
-              <img src="@/assets/images/icons/radar.svg" alt="Icon">
-            </span>
-            <span class="text-secondary menu-text  body-medium">Контент радар</span>
-            <span class="background-brand-subtle text-brand badger caption text-lh-caption bold ">123</span>
-          </a>
-        </li>
+        <NavMenuItem iconSrc="src/assets/images/icons/home.svg" label="Главная" href="/" />
+        <NavMenuItem iconSrc="src/assets/images/icons/video.svg" label="Видео" href="/" />
+        <NavMenuItem iconSrc="src/assets/images/icons/search.svg" label="Шпионаж" href="/" />
+        <NavMenuItem 
+          iconSrc="src/assets/images/icons/radar.svg" 
+          label="Контент радар" 
+          href="/" 
+          :badge="{text: '123', class: 'background-brand-subtle text-brand badger caption text-lh-caption bold'}" 
+        />
 
         <li class="sub-menu"><a>Работа с соцсетями</a></li>
-        <li class="sub-menu-item">
-          <a href="/crosspost" class="horizontal-align">
-            <span class="icon  icon-16">
-              <img src="@/assets/images/icons/cross-posting.svg" alt="Icon">
-            </span>
-            <span class="text-secondary menu-text  body-medium">Кросс-постинг</span>
-          </a>
-        </li>
-        <li class="sub-menu-item">
-          <a href="/bots" class="horizontal-align">
-            <span class="icon  icon-16">
-              <img src="@/assets/images/icons/chat-bots.svg" alt="Icon">
-            </span>
-            <span class="text-secondary  menu-text body-medium">Чат боты</span>
-          </a>
-        </li>
+        <NavMenuItem iconSrc="src/assets/images/icons/cross-posting.svg" label="Кросс-постинг" href="/crosspost" />
+        <NavMenuItem iconSrc="src/assets/images/icons/chat-bots.svg" label="Чат боты" href="/bots" />
         <li class="sub-menu"><a>Инструменты</a></li>
-        <li class="sub-menu-item">
-          <a href="/ai" class="horizontal-align">
-            <span class="icon  icon-16">
-              <img src="@/assets/images/icons/ai-scenarios.svg" alt="Icon">
-            </span>
-            <span class="text-secondary  menu-text body-medium">ИИ-сценарный</span>
-          </a>
-        </li>
-
-        <li class="sub-menu-item">
-          <a href="/carousel" class="horizontal-align">
-            <span class="icon  icon-16">
-              <img src="@/assets/images/icons/carusel.svg" alt="Icon">
-            </span>
-            <span class="text-secondary menu-text  body-medium">Карусели</span>
-          </a>
-        </li>
-        <li class="sub-menu-item">
-          <a href="/analyze-video" class="horizontal-align">
-            <span class="icon  icon-16">
-              <img src="@/assets/images/icons/an-video.svg" alt="Icon">
-            </span>
-            <span class="text-secondary menu-text  body-medium">Анализ видео</span>
-          </a>
-        </li>
-        <li class="sub-menu-item">
-          <a href="/analyze-profile" class="horizontal-align">
-            <span class="icon  icon-16">
-              <img src="@/assets/images/icons/an-prof.svg" alt="Icon">
-            </span>
-            <span class="text-secondary  menu-text body-medium">Анализ профиля</span>
-          </a>
-        </li>
-        <li class="sub-menu-item">
-          <a href="/draft" class="horizontal-align">
-            <span class="icon  icon-16">
-              <img src="@/assets/images/icons/chernovik.svg" alt="Icon">
-            </span>
-            <span class="text-secondary  menu-text body-medium">Черновик</span>
-            <span class="background-tertiary badger caption text-lh-caption bold text-secondary">скоро</span>
-          </a>
-        </li>
+        <NavMenuItem iconSrc="src/assets/images/icons/ai-scenarios.svg" label="ИИ-сценарный" href="/ai" />
+        <NavMenuItem iconSrc="src/assets/images/icons/carusel.svg" label="Карусели" href="/" />
+        <NavMenuItem iconSrc="src/assets/images/icons/an-video.svg" label="Анализ видео" href="/" />
+        <NavMenuItem iconSrc="src/assets/images/icons/an-prof.svg" label="Анализ профиля" href="/" />
+        <NavMenuItem 
+          iconSrc="src/assets/images/icons/chernovik.svg" 
+          label="Черновик"
+          href="/" 
+          :badge="{text: 'скоро', class: 'background-tertiary badger caption text-lh-caption bold text-secondary'}"/>
       </ul>
     </nav>
     <div class="layout bg-white">
@@ -165,6 +91,10 @@
 
 
 <script setup lang="ts">
+import NavMenuItem from '@/components/ui/NavMenuItem.vue'
+import Icon from '@/components/ui/Icon.vue'
+import BloggerCard from '@/components/ui/BloggerCard.vue'
+
 const {
   image = '/src/assets/images/utils/video-preview.png',
   desc = '500 000 лайков на ютубе делаем, <br>бля буду скидываю 😘',
@@ -257,7 +187,7 @@ img.out[src$="toggle-side-menu.svg"] {
 }
 
 .sidebar nav ul li {
-  padding: 4px 10px;
+  padding: 8px 10px;
 }
 
 .sidebar nav ul li a {
@@ -278,12 +208,6 @@ img.out[src$="toggle-side-menu.svg"] {
 .sidebar .sub-menu a {
   color: var(--text-tertiary, #83939C);
 }
-
-.sidebar .sub-menu-item .badger {
-  margin-left: 20px;
-  border-radius: 16px;
-}
-
 
 
 
