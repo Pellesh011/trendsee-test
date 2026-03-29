@@ -13,10 +13,10 @@
         <div v-if="expandIcon" class="mr-5">
           <div class=" icon-16">
             <div v-if="isOpen">
-              <img :src="`src/assets/images/icons/arrow-down.svg`" alt="views" class="rotate-180">
+              <img src="@/assets/images/icons/arrow-down.svg" alt="views" class="rotate-180">
             </div>
             <div v-if="!isOpen">
-              <img :src="`src/assets/images/icons/arrow-down.svg`" alt="views">
+              <img src="@/assets/images/icons/arrow-down.svg" alt="views">
             </div>
 
           </div>
