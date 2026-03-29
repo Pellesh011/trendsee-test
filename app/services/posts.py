@@ -1,41 +1,39 @@
+# services/posts.py
+
 from uuid import UUID
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, Optional, List
 from fastapi import HTTPException
-import asyncio
-import json
 from sqlalchemy import select, insert, update, delete, and_, desc, text, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from models.models import Post
+from models.schemas import PostCreate, PostOut
 from redis.asyncio import Redis
-from models.schemas import PostCreate, PostUpdate, PostOut
+
+from .redis_post_cache import RedisPostCacheService as cache
+
 
 class PostService:
     @staticmethod
-    async def create(
-        session: AsyncSession,
-        redis: Redis,
-        user_id: UUID,
-        post_data: PostCreate
-    ) -> Dict[str, Any]:
-        try:
-            ins = insert(Post).values(
-                user_id=user_id, 
-                title=post_data.title, 
-                text=post_data.text
-            ).returning(Post.id)
-            post_id = await session.scalar(ins)
-            stmt = select(Post).where(Post.id == post_id)
-            result = await session.execute(stmt)
-            post = result.scalar_one()
-            await session.commit()
-            post_obj = PostOut.model_validate(post)
-            post_dict = post_obj.model_dump(mode='json')
-            await redis.setex(str(post_id), 600, json.dumps(post_dict))
-            await redis.lpush(f"users_posts:{user_id}", str(post_id))
-            return post_dict
-        except Exception as e:
-            print(e) 
-            return {}
+    async def create(session: AsyncSession, redis: Redis, user_id: UUID, post_data: PostCreate) -> Dict[str, Any]:
+        ins = insert(Post).values(
+            user_id=user_id,
+            title=post_data.title,
+            text=post_data.text
+        ).returning(Post.id)
+
+        post_id = await session.scalar(ins)
+
+        result = await session.execute(select(Post).where(Post.id == post_id))
+        post = result.scalar_one()
+
+        await session.commit()
+
+        post_dict = PostOut.model_validate(post).model_dump(mode='json')
+
+        await cache.set_post(redis, post_id, post_dict)
+        await cache.add_user_post(redis, user_id, post_id)
+
+        return post_dict
 
     @staticmethod
     async def update(
@@ -43,113 +41,111 @@ class PostService:
         redis: Redis,
         post_id: UUID,
         user_id: UUID,
-        title: Optional[str] = None,
-        text: Optional[str] = None
+        title: Optional[str],
+        text: Optional[str]
     ) -> Dict[str, Any]:
-        if title is None and text is None:
+
+        if not title and not text:
             raise HTTPException(400, "At least one field required")
+
         values = {}
-        if title is not None:
-            values['title'] = title
-        if text is not None:
-            values['text'] = text
-        stmt = update(Post).where(and_(Post.id == post_id, Post.user_id == user_id)).values(**values).returning(Post)
+        if title:
+            values["title"] = title
+        if text:
+            values["text"] = text
+
+        stmt = (
+            update(Post)
+            .where(and_(Post.id == post_id, Post.user_id == user_id))
+            .values(**values)
+            .returning(Post)
+        )
+
         result = await session.execute(stmt)
         post = result.scalar_one_or_none()
+
         if not post:
             raise HTTPException(404, "Post not found or unauthorized")
+
         await session.commit()
-        post_obj = PostOut.model_validate(post)
-        post_dict = post_obj.model_dump(mode='json')
-        await redis.setex(str(post_id), 600, json.dumps(post_dict))
+
+        post_dict = PostOut.model_validate(post).model_dump(mode='json')
+
+        await cache.set_post(redis, post_id, post_dict)
+
         return post_dict
 
     @staticmethod
-    async def delete(
-        session: AsyncSession,
-        redis: Redis,
-        post_id: UUID,
-        user_id: UUID
-    ) -> bool:
+    async def delete(session: AsyncSession, redis: Redis, post_id: UUID, user_id: UUID) -> bool:
         stmt = delete(Post).where(and_(Post.id == post_id, Post.user_id == user_id))
+
         result = await session.execute(stmt)
         await session.commit()
+
         if result.rowcount == 1:
-            await redis.delete(str(post_id))
+            await cache.delete_post(redis, post_id)
             return True
+
         return False
 
     @staticmethod
     async def get_user_posts(
-        redis: Redis, 
-        session: AsyncSession, 
-        user_id: UUID, 
-        skip: int = 0, 
-        limit: int = 10
+        redis: Redis,
+        session: AsyncSession,
+        user_id: UUID,
+        skip: int,
+        limit: int
     ) -> Dict[str, Any]:
-        key = f"users_posts:{user_id}"
-        
-        # Clean invalid posts from Redis list
-        all_post_ids_str = await redis.lrange(key, 0, -1)
-        invalid_ids = []
-        for post_id_str in all_post_ids_str:
-            if not await redis.exists(post_id_str):
-                invalid_ids.append(post_id_str)
-        for inv_id in invalid_ids:
-            await redis.lrem(key, 1, inv_id)
-        
-        # Get total from Redis list
-        total = await redis.llen(key)
-        
-        # Fetch Redis posts for this page
-        end_idx = skip + limit
-        redis_post_ids_str = await redis.lrange(key, skip, end_idx - 1)
+
+        await cache.remove_invalid_posts(redis, user_id)
+
+        total = await cache.count_user_posts(redis, user_id)
+
+        ids = await cache.get_user_post_ids(redis, user_id, skip, limit)
+
         redis_posts = []
         redis_ids = set()
-        for post_id_str in redis_post_ids_str:
-            cached = await redis.get(post_id_str)
-            if cached:
-                post_dict_raw = json.loads(cached)
-                post_obj = PostOut.model_validate(post_dict_raw)
-                post_dict = post_obj.model_dump(mode='json')
-                redis_posts.append(post_dict)
-                redis_ids.add(post_id_str)
-        
-        # Compute gap
+
+        for pid in ids:
+            data = await cache.get_post(redis, pid)
+            if data:
+                redis_posts.append(data)
+                redis_ids.add(pid)
+
         gap = limit - len(redis_posts)
         db_posts = []
-        
+
         if gap > 0:
-            # Fetch old posts from DB to fill gap (newest first among old)
-            stmt = select(Post).where(
-                and_(
-                    Post.user_id == user_id,
-                    Post.created_at < (func.now() - text("INTERVAL '10 minutes'"))
+            stmt = (
+                select(Post)
+                .where(
+                    and_(
+                        Post.user_id == user_id,
+                        Post.created_at < (func.now() - text("INTERVAL '10 minutes'"))
+                    )
                 )
-            ).order_by(desc(Post.created_at)).limit(gap)
+                .order_by(desc(Post.created_at))
+                .limit(gap)
+            )
+
             result = await session.execute(stmt)
-            rows = result.fetchall()
-            
-            for row in rows:
+
+            for row in result.fetchall():
                 post = row.Post
-                post_obj = PostOut.model_validate(post)
-                post_dict = post_obj.model_dump(mode='json')
-                post_id_str = str(post_dict['id'])
-                if post_id_str not in redis_ids:
+                post_dict = PostOut.model_validate(post).model_dump(mode='json')
+
+                if str(post_dict["id"]) not in redis_ids:
                     db_posts.append(post_dict)
-        
-        # Merge and sort DESC by created_at
+
         all_posts = redis_posts + db_posts
-        all_posts.sort(key=lambda p: p['created_at'], reverse=True)
-        
-        # Slice to exact page
-        items = all_posts[:limit]
-        
+        all_posts.sort(key=lambda x: x["created_at"], reverse=True)
+
         return {
-            "items": items,
+            "items": all_posts[:limit],
             "total": total + len(db_posts),
             "skip": skip,
             "limit": limit
         }
+
 
 post_service = PostService()

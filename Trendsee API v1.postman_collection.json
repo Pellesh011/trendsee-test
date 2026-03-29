@@ -1,33 +1,11 @@
 {
   "info": {
+    "_postman_id": "bf967b87-d486-4c9b-8cbc-6274396882cc",
     "name": "Trendsee API v1",
-    "_postman_id": "trendsee-api-collection",
     "description": "Complete Postman collection for Trendsee FastAPI backend. Includes auth flow, users, posts with examples and pre-req scripts.",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27692163"
   },
-  "variable": [
-    {
-      "key": "base_url",
-      "value": "http://localhost:8000",
-      "type": "string",
-      "description": "API base URL (update if server runs elsewhere)"
-    },
-    {
-      "key": "token",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "user_id",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "post_id",
-      "value": "",
-      "type": "string"
-    }
-  ],
   "item": [
     {
       "name": "Root",
@@ -39,8 +17,12 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/",
-              "host": ["{{base_url}}"],
-              "path": [""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                ""
+              ]
             },
             "description": "Root endpoint info"
           },
@@ -57,8 +39,12 @@
             {
               "listen": "prerequest",
               "script": {
-                "exec": [],
-                "type": "text/javascript"
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
               }
             },
             {
@@ -72,11 +58,11 @@
                   "pm.test(\"Has access_token\", function () {",
                   "    pm.expect(jsonData).to.have.property('access_token');",
                   "});",
-                  "// Set globals",
-                  "pm.collectionVariables.set(\"user_id\", \"\"); // Will be set in next req",
                   "pm.collectionVariables.set(\"token\", jsonData.access_token);"
                 ],
-                "type": "text/javascript"
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
               }
             }
           ],
@@ -99,8 +85,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/users/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "users", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                ""
+              ]
             }
           },
           "response": []
@@ -112,12 +105,11 @@
               "listen": "prerequest",
               "script": {
                 "exec": [
-                  "// Use created user_id if available",
-                  "if (!pm.collectionVariables.get(\"user_id\")) {",
-                  "  throw new Error(\"Run Create User first\");",
-                  "}"
+                  ""
                 ],
-                "type": "text/javascript"
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
               }
             },
             {
@@ -130,17 +122,44 @@
                   "const jsonData = pm.response.json();",
                   "pm.collectionVariables.set(\"token\", jsonData.access_token);"
                 ],
-                "type": "text/javascript"
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
               }
             }
           ],
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMmQxNjFlMC1kODExLTQyNDctYTllNi00MjcwYWMxYmI0MmYiLCJleHAiOjE3NzQ2MjU4NDh9.XUBqj160T6GbMFev0d4PoSbUzFqHlwG9mQM1l_N170w",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
               "raw": "{{base_url}}/api/v1/users/{{user_id}}/token",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "users", "{{user_id}}", "token"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "{{user_id}}",
+                "token"
+              ],
+              "variable": [
+                {
+                  "key": "user_id",
+                  "value": "00000000-0000-0000-0000-000000000000",
+                  "description": "Replace with actual UUID from create user response (or set manually)"
+                }
+              ]
             }
           },
           "response": [],
@@ -183,8 +202,16 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/users/me/name",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "users", "me", "name"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "me",
+                "name"
+              ]
             }
           },
           "response": []
@@ -206,8 +233,15 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/api/v1/users/me",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "users", "me"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "me"
+              ]
             }
           },
           "response": []
@@ -219,6 +253,21 @@
       "item": [
         {
           "name": "POST /api/v1/posts/ - Create Post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "const jsonData = pm.response.json();",
+                  "pm.collectionVariables.set(\"post_id\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
           "request": {
             "auth": {
               "type": "bearer",
@@ -248,26 +297,18 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/posts/",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "posts", ""]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "posts",
+                ""
+              ]
             }
           },
-          "response": [],
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status code is 201\", function () {",
-                  "    pm.response.to.have.status(201);",
-                  "});",
-                  "const jsonData = pm.response.json();",
-                  "pm.collectionVariables.set(\"post_id\", jsonData.id);"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ]
+          "response": []
         },
         {
           "name": "GET /api/v1/posts/me - List My Posts",
@@ -286,8 +327,15 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/api/v1/posts/me?skip=0&limit=10",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "posts", "me"],
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "posts",
+                "me"
+              ],
               "query": [
                 {
                   "key": "skip",
@@ -346,8 +394,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/posts/{{post_id}}",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "posts", "{{post_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "posts",
+                "{{post_id}}"
+              ]
             }
           },
           "response": []
@@ -382,14 +437,39 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/api/v1/posts/{{post_id}}",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "posts", "{{post_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "posts",
+                "{{post_id}}"
+              ]
             }
           },
           "response": []
         }
       ]
     }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "description": "API base URL (update if server runs elsewhere)"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "post_id",
+      "value": ""
+    }
   ]
 }
-
