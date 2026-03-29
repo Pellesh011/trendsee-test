@@ -26,7 +26,7 @@ interface Props {
   stats: Stat[]
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>() // eslint-disable-next-line @typescript-eslint/no-unused-vars
 </script>
 
 <style scoped>

@@ -10,26 +10,25 @@
     <nav>
       <ul class="side-menu">
         <li class="sub-menu"><a class="heading-6">Поиск контента</a></li>
-        <NavMenuItem iconSrc="src/assets/images/icons/home.svg" label="Главная" href="/" />
-        <NavMenuItem iconSrc="src/assets/images/icons/video.svg" label="Видео" href="/" />
-        <NavMenuItem iconSrc="src/assets/images/icons/search.svg" label="Шпионаж" href="/" />
+        <NavMenuItem icon-src="home" label="Главная" href="/" />
+        <NavMenuItem icon-src="search" label="Шпионаж" href="/" />
         <NavMenuItem 
-          iconSrc="src/assets/images/icons/radar.svg" 
+          icon-src="radar" 
           label="Контент радар" 
           href="/" 
           :badge="{text: '123', class: 'background-brand-subtle text-brand badger caption text-lh-caption bold'}" 
         />
 
         <li class="sub-menu"><a>Работа с соцсетями</a></li>
-        <NavMenuItem iconSrc="src/assets/images/icons/cross-posting.svg" label="Кросс-постинг" href="/crosspost" />
-        <NavMenuItem iconSrc="src/assets/images/icons/chat-bots.svg" label="Чат боты" href="/bots" />
+        <NavMenuItem icon-src="cross-posting" label="Кросс-постинг" href="/crosspost" />
+        <NavMenuItem iconSrc="chat-bots" label="Чат боты" href="/bots" />
         <li class="sub-menu"><a>Инструменты</a></li>
-        <NavMenuItem iconSrc="src/assets/images/icons/ai-scenarios.svg" label="ИИ-сценарный" href="/ai" />
-        <NavMenuItem iconSrc="src/assets/images/icons/carusel.svg" label="Карусели" href="/" />
-        <NavMenuItem iconSrc="src/assets/images/icons/an-video.svg" label="Анализ видео" href="/" />
-        <NavMenuItem iconSrc="src/assets/images/icons/an-prof.svg" label="Анализ профиля" href="/" />
+        <NavMenuItem iconSrc="ai-scenarios" label="ИИ-сценарный" href="/ai" />
+        <NavMenuItem iconSrc="carusel" label="Карусели" href="/" />
+        <NavMenuItem iconSrc="an-video" label="Анализ видео" href="/" />
+        <NavMenuItem iconSrc="an-prof" label="Анализ профиля" href="/" />
         <NavMenuItem 
-          iconSrc="src/assets/images/icons/chernovik.svg" 
+          iconSrc="chernovik" 
           label="Черновик"
           href="/" 
           :badge="{text: 'скоро', class: 'background-tertiary badger caption text-lh-caption bold text-secondary'}"/>
@@ -92,26 +91,7 @@
 
 <script setup lang="ts">
 import NavMenuItem from '@/components/ui/NavMenuItem.vue'
-import Icon from '@/components/ui/Icon.vue'
-import BloggerCard from '@/components/ui/BloggerCard.vue'
 
-const {
-  image = '/src/assets/images/utils/video-preview.png',
-  desc = '500 000 лайков на ютубе делаем, <br>бля буду скидываю 😘',
-  username = '@blogerich',
-  followers = '384.5K',
-  likes = '105K',
-  comments = '485',
-  date = '12.12.2025'
-} = defineProps<{
-  image?: string
-  desc?: string
-  username?: string
-  followers?: string
-  likes?: string
-  comments?: string
-  date?: string
-}>();
 </script>
 <style scoped>
 img.exit[src$="toggle-side-menu.svg"] {

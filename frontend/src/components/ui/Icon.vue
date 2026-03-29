@@ -1,11 +1,28 @@
 <template>
   <span class="icon icon-16" :class="sizeClass">
-    <img :src="src" :alt="alt" class="icon-img" />
+    <img :src="icon" :alt="alt" class="icon-img" />
   </span>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+
+
+const icons = import.meta.glob('/src/assets/images/icons/*.svg', {
+  eager: true,
+  import: 'default'
+}) as Record<string, string>
+
+const iconMap = Object.fromEntries(
+  Object.entries(icons).map(([path, value]) => {
+    const name = path.split('/').pop()?.replace('.svg', '')
+    return [name, value]
+  })
+)
+
+const icon = computed((): string => {
+  return iconMap[props.src] ?? ''
+})
 
 interface Props {
   src: string

@@ -1,10 +1,23 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import type { Post, BackendPost, MyPostsResponse } from '@/types/post';
+import { router } from '@/router';
 
 const api = axios.create({
   baseURL: 'http://localhost:8000/api/v1',
 });
+
+// Global interceptor for 401 Unauthorized - redirect to login
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('access_token');
+      router.push('/login');
+    }
+    return Promise.reject(error);
+  }
+);
 
 export function useApi() {
   const loading = ref(false);

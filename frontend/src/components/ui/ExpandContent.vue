@@ -1,6 +1,6 @@
 <template>
   <div class="expand-container" :class=" background">
-    <div class="expand-content" :style="contentStyle" ref="contentWrapper" :aria-expanded="isOpen.toString()">
+    <div class="expand-content" :style="contentStyle" ref="contentWrapper" >
       <slot>
         <!-- fallback content -->
         <p class="" v-html="modelValue"></p>
@@ -40,6 +40,7 @@ interface Props {
   transitionMs?: number
   classes?: string
   expandBtnAlign?: string
+  expandBtn?: boolean
   expandIcon?: boolean
   background?: string
 }
@@ -55,7 +56,7 @@ const contentFullHeight = ref<number>(0)
 
 // defaults
 const maxCollapsedHeight = props.maxCollapsedHeight ?? 80
-const transitionMs = props.transitionMs ?? 300
+// const transitionMs = props.transitionMs ?? 300
 
 const contentStyle = computed(() => {
   const height = isOpen.value ? `${contentFullHeight.value}px` : `${maxCollapsedHeight}px`

@@ -65,7 +65,7 @@
                     </div>
                 </div>
             </div>
-            <img :src="post.image" alt="Post Image" class="post-image">
+            <img src="@/assets/images/utils/video-preview.png" alt="Post Image" class="post-image">
         </div>
         <div class="blogger-card container">
             <div class="flex">
@@ -97,7 +97,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits } from 'vue';
 import type { Post } from '@/types/post';
 
 interface Props {

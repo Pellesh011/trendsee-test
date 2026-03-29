@@ -30,7 +30,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   avatarSrc: '@/assets/images/utils/blogger-avatar.jpg',
   showFollow: true
-})
+}) as Props // eslint-disable-next-line @typescript-eslint/no-unused-vars
 </script>
 
 <style scoped>

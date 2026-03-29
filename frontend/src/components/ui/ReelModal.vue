@@ -23,7 +23,7 @@
                 </div>
               </div>
             </div>
-            <img :src="modalStore.activePost?.image || ''" alt="Post Image" class="post-image">
+            <img src="@/assets/images/utils/video-preview.png" alt="Post Image" class="post-image">
             <img src="@/assets/images/icons/video-play.svg" alt="open" class="video-play">
             <div class="container  flex flex-full-width mt-5">
               <p class="text-secondary-inverse caption text-lh-caption regular">{{ modalStore.activePost?.date || new
@@ -53,7 +53,9 @@
             </div>
             <div class="container video-card-desc-short mt-10">
               <Expand v-model="modalStore.activePost.desc" :maxCollapsedHeight="16" :transitionMs="250"
+                classes="" :expandBtnAlign="'left'" :expandIcon="true"
                 background="caption semibold-500 gray-8" />
+
             </div>
             <div class="mt-10">
               <div class="horizontal-align flex-full-width background-secondary modal-stat-item ">
@@ -188,7 +190,7 @@
           </div>
           <div class="mt-10">
             <Expand v-model="transcridtionText" :maxCollapsedHeight="160" :transitionMs="250"
-              expandBtnAlign="flex-content-right" expandIcon="arrow-down"
+              expandBtnAlign="flex-content-right" :expandIcon="true" classes=""
               background="background-secondary pad-20 body-small text-secondary text-lh-big" />
           </div>
           <button class="btn-big  background-default mt-30">
@@ -357,13 +359,13 @@
 
 <script setup lang="ts">
 import { useModalStore } from '@/stores/modal';
-import type { Post } from '@/types/post';
+// import type { Post } from '@/types/post';
+// import { VueElement } from 'vue';
 import { ref } from 'vue';
 const modalStore = useModalStore();
 
 
 import Expand from '@/components/ui/ExpandContent.vue' // путь к файлу
-import { VueElement } from 'vue';
 
 
 const transcridtionText = ref(`SPF скатывается? Смотри — вот эти катышки. И нет, это не всегда “плохой SPF”.
